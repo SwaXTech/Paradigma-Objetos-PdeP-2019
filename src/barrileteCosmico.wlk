@@ -5,7 +5,7 @@ object barrileteCosmico{
 	method destinosMasImportantes(){
 		return destinos.filter{
 			destino =>
-				destino.precio() > 2000
+				destino.esImportante()
 		}
 	}
 	
@@ -31,6 +31,10 @@ class Destino{
 	var property nombre
 	var property equipajeImprescindible = []
 	var property precio 
+	
+	method esImportante(){
+		return precio > 2000
+	}
 }
 
 class Usuario{
