@@ -3,7 +3,10 @@ object barrileteCosmico{
 	var destinos = #{}
 	
 	method destinosMasImportantes(){
-		
+		return destinos.filter{
+			destino =>
+				destino.precio() > 2000
+		}
 	}
 	
 	method aplicarDescuento(unDescuento){
@@ -16,6 +19,10 @@ object barrileteCosmico{
 	
 	method cartaDeDestinos(){
 		
+	}
+	
+	method agregarDestino(unDestino){
+		destinos.add(unDestino)
 	}
 	
 }

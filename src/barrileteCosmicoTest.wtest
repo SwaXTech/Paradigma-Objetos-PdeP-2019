@@ -26,7 +26,16 @@ describe "Barrilete Cósmico" {
 		goodAirs = new Destino()
 		goodAirs.nombre("Good Airs")
 		goodAirs.equipajeImprescindible(["Cervesa", "Protector Solar"])
-		goodAirs.precio(3500)		
+		goodAirs.precio(1500)	
+		
+		barrileteCosmico.agregarDestino(garlicSea)
+		barrileteCosmico.agregarDestino(silverSea)	
+		barrileteCosmico.agregarDestino(lastToninas)	
+		barrileteCosmico.agregarDestino(goodAirs)		
+	}
+	
+	test "Los destinos más importantes de Barrilete Cósmico son: Garlic's Sea y Last Toninas"{
+		assert.equals(barrileteCosmico.destinosMasImportantes(), #{garlicSea, lastToninas})
 	}
 	
 	
