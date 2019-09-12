@@ -21,9 +21,9 @@ object barrileteCosmico{
 }
 
 class Destino{
-	var nombre
-	var equipajeIndispensable = []
-	var precio 
+	var property nombre
+	var property equipajeImprescindible = []
+	var property precio 
 }
 
 class Usuario{

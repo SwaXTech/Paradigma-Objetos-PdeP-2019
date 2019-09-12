@@ -2,8 +2,33 @@ import barrileteCosmico.*
 
 describe "Barrilete Cósmico" {
 
-	test "true es true" {
-		assert.that(true)
+	var garlicSea
+	var silverSea
+	var lastToninas
+	var goodAirs
+	
+	fixture{
+		garlicSea = new Destino()
+		garlicSea.nombre("Garlic´s Sea")
+		garlicSea.equipajeImprescindible(["Caña de Pescar", "Piloto"])
+		garlicSea.precio(2500)
+		
+		silverSea = new Destino()
+		silverSea.nombre("Silver´s Sea")
+		silverSea.equipajeImprescindible(["Protector Solar", "Equipo de Buceo"])
+		silverSea.precio(1350)
+		
+		lastToninas = new Destino()
+		lastToninas.nombre("Last Toninas")
+		lastToninas.equipajeImprescindible(["Vacuna Gripal", "Vacuna B", "Necronomicon"])
+		lastToninas.precio(3500)
+		
+		goodAirs = new Destino()
+		goodAirs.nombre("Good Airs")
+		goodAirs.equipajeImprescindible(["Cervesa", "Protector Solar"])
+		goodAirs.precio(3500)		
 	}
+	
+	
 	
 }
