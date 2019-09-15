@@ -25,7 +25,7 @@ describe "Barrilete Cósmico" {
 		
 		goodAirs = new Destino()
 		goodAirs.nombre("Good Airs")
-		goodAirs.equipajeImprescindible(["Cervesa", "Protector Solar"])
+		goodAirs.equipajeImprescindible(["Cerveza", "Protector Solar"])
 		goodAirs.precio(1500)	
 		
 		barrileteCosmico.agregarDestino(garlicSea)
@@ -38,6 +38,30 @@ describe "Barrilete Cósmico" {
 		assert.equals(barrileteCosmico.destinosMasImportantes(), #{garlicSea, lastToninas})
 	}
 	
+	test "Aplicar un descuento de 25% a Last Toninas, su precio es de $2625" {
+		lastToninas.aplicarDescuento(25)
+		assert.equals(2625, lastToninas.precio())
+	}
+	
+	test "Aplicar un descuento de 25% a Last Toninas, tiene el certificado de descuento en su equipaje imprescindible" {
+		lastToninas.aplicarDescuento(25)
+		assert.that(lastToninas.equipajeImprescindible().contains("Certificado de descuento"))
+	}
+	
+	test "Aplicar un descuento del 15% a todos los destinos de Barrilete Cósmico, 
+			Garlic´s sea: $2125
+			Silver's Sea: $1147.5
+			Last Toninas: $2975
+			Good Airs: $1275
+			Todos deben poseer el certificado de descuento."
+		{
+			barrileteCosmico.aplicarDescuento(15)
+			assert.equals(2125, garlicSea.precio())
+			assert.equals(1147.5, silverSea.precio())
+			assert.equals(2975, lastToninas.precio())
+			assert.equals(1275, goodAirs.precio())
+			assert.that(barrileteCosmico.destinos().all{destino => destino.equipajeImprescindible().contains("Certificado de descuento")})
+		}
 	
 	
 }

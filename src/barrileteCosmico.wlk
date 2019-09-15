@@ -2,6 +2,10 @@ object barrileteCosmico{
 	
 	var destinos = #{}
 	
+	method destinos() {
+		return destinos
+	}
+	
 	method destinosMasImportantes(){
 		return destinos.filter{
 			destino =>
@@ -10,7 +14,10 @@ object barrileteCosmico{
 	}
 	
 	method aplicarDescuento(unDescuento){
-		
+		destinos.forEach{
+			destino => 
+				destino.aplicarDescuento(unDescuento)
+		}
 	}
 	
 	method esEmpresaExtrema(){
@@ -30,10 +37,15 @@ object barrileteCosmico{
 class Destino{
 	var property nombre
 	var property equipajeImprescindible = []
-	var property precio 
+	var property precio
 	
-	method esImportante(){
+	method esImportante() {
 		return precio > 2000
+	}
+	
+	method aplicarDescuento(unDescuento) {
+		precio *= (100 - unDescuento) / 100
+		equipajeImprescindible.add("Certificado de descuento")	
 	}
 }
 
