@@ -63,5 +63,15 @@ describe "Barrilete Cósmico" {
 			assert.that(barrileteCosmico.destinos().all{destino => destino.equipajeImprescindible().contains("Certificado de descuento")})
 		}
 	
+	test "Silver's Sea no es un destino peligroso" {
+		assert.notThat(silverSea.esPeligroso())
+	}
 	
+	test "Last Toninas es el único destino peligroso" {
+		assert.equals(#{lastToninas}, barrileteCosmico.destinosPeligrosos())
+	}
+	
+	test "Barrilete cósmico es una empresa extrema" {
+		assert.that(barrileteCosmico.esEmpresaExtrema())
+	}
 }

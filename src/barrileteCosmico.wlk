@@ -6,29 +6,40 @@ object barrileteCosmico{
 		return destinos
 	}
 	
-	method destinosMasImportantes(){
+	method destinosMasImportantes() {
 		return destinos.filter{
 			destino =>
 				destino.esImportante()
 		}
 	}
 	
-	method aplicarDescuento(unDescuento){
+	method aplicarDescuento(unDescuento) {
 		destinos.forEach{
 			destino => 
 				destino.aplicarDescuento(unDescuento)
 		}
 	}
 	
-	method esEmpresaExtrema(){
+	method esEmpresaExtrema() {
+		return self.destinosMasImportantes().any{
+			destino =>
+				destino.esPeligroso()
+		}
+	}
+	
+	// Para el test
+	method destinosPeligrosos() {
+		return destinos.filter{
+			destino => 
+				destino.esPeligroso()
+		}
+	}
+	
+	method cartaDeDestinos() {
 		
 	}
 	
-	method cartaDeDestinos(){
-		
-	}
-	
-	method agregarDestino(unDestino){
+	method agregarDestino(unDestino) {
 		destinos.add(unDestino)
 	}
 	
@@ -46,6 +57,13 @@ class Destino{
 	method aplicarDescuento(unDescuento) {
 		precio *= (100 - unDescuento) / 100
 		equipajeImprescindible.add("Certificado de descuento")	
+	}
+	
+	method esPeligroso() {
+		return equipajeImprescindible.any{
+			equipaje =>
+				equipaje.toLowerCase().contains("vacuna")
+		}
 	}
 }
 
