@@ -76,11 +76,10 @@ class Usuario{
 	
 	method volarA(unLugar){
 		if(self.puedeViajar(unLugar)){
-		lugaresVisitados.add(unLugar) 
-		saldo = saldo - unLugar.precio() 
-		return true
-		}
-		else{
+			lugaresVisitados.add(unLugar) 
+			saldo = saldo - unLugar.precio() 
+			return true
+		} else {
 			return false
 		}
 	}
