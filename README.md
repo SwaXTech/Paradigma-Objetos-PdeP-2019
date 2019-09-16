@@ -9,7 +9,7 @@ Podrán encontrar el enunciado del TP haciendo click [acá](https://docs.google.
 |:------------------:|:------------------:|:--------------:|:--------------:|
 | Herasimiuk         | Alexis             | 167.251-4      | @SwaXTech      |
 | Rickert            | Nicolás            | 167.394-4      | @nicorickert   |
-| Farías             | Nahuel             | 333.333-3      | @NahuelFarias  |
+| Farías             | Nahuel             | 168.174-6      | @NahuelFarias  |
 | Oviedo             | Facundo            | 444.444-4      | @foviedo       |
 
 ## ¡Ya lo cloné! y ahora ¿cómo lo importo desde `Wollok`?
