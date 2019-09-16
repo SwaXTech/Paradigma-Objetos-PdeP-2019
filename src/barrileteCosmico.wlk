@@ -68,21 +68,38 @@ class Destino{
 }
 
 class Usuario{
-	var nombre
-	var nombreDeUsuario
-	var conoce = #{}
+	var property nombre
+	var property nombreDeUsuario
+	var property lugaresVisitados = #{}
 	var siguiendo = #{}
-	var saldo
+	var property saldo
 	
 	method volarA(unLugar){
-		
+		if(self.puedeViajar(unLugar)){
+		lugaresVisitados.add(unLugar) 
+		saldo = saldo - unLugar.precio() 
+		return true
+		}
+		else{
+			return false
+		}
+	}
+	
+	//method descontar(unLugar){
+	//	saldo = saldo 
+	//}
+	
+	method puedeViajar(unLugar){
+		return saldo >= unLugar.precio()
 	}
 	
 	method obtenerKM(){
-		
+		return lugaresVisitados.sum({ lugarVisitado => 
+			lugarVisitado.precio()}) * 0.10
 	}
 	
 	method seguirA(unUsuario){
-		
+		siguiendo.add(unUsuario) 
+		unUsuario.seguirA(self)
 	}
 }
