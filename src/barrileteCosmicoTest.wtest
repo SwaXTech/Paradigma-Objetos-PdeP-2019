@@ -82,6 +82,9 @@ describe "Barrilete Cósmico" {
 	test "Barrilete cósmico es una empresa extrema" {
 		assert.that(barrileteCosmico.esEmpresaExtrema())
 	}
+	test "Carta de destinos de Barrilete Cosmico"{
+		assert.equals(#{lastToninas, garlicSea, goodAirs, silverSea}, barrileteCosmico.destinos())
+	}
 	test "Los kilometros de PHari son 500" {
 		assert.equals(500, pHari.obtenerKM())
 	}
