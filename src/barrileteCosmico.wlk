@@ -35,13 +35,6 @@ object barrileteCosmico{
 		}
 	}
 	
-	//method cartaDeDestinos() {  // Carta Destino es igual a "destinos"
-		//return destinos.filter{
-		//	destino =>
-		//		destino.nombre()
-		//}
-	//}
-	
 	method agregarDestino(unDestino) {
 		destinos.add(unDestino)
 	}
@@ -99,15 +92,20 @@ class Usuario{
 	}
 	
 	method obtenerKM(){
+		return self.sumaDePreciosDeLosDestinos() * 0.10
+	}
+	
+	method sumaDePreciosDeLosDestinos() {
 		return lugaresVisitados.sum({ 
 			lugarVisitado => 
-				lugarVisitado.precio()}) * 0.10
+				lugarVisitado.precio()})
 	}
 	
 	method seguirA(unUsuario){
 		siguiendo.add(unUsuario) 
 		unUsuario.seguirA(self)
 	}
+	
 	method saldo(){
 		return saldo
 	}
