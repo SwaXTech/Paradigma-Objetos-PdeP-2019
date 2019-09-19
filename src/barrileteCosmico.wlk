@@ -23,7 +23,6 @@ object barrileteCosmico{
 		}
 	}
 	
-	// Para el test
 	method destinosPeligrosos() {
 		return destinos.filter{
 			destino => 
