@@ -49,7 +49,7 @@ describe "Barrilete Cósmico" {
 			assert.equals(1147.5, silverSea.precio())
 			assert.equals(2975, lastToninas.precio())
 			assert.equals(1275, goodAirs.precio())
-			assert.that(barrileteCosmico.destinos().all{destino => destino.equipajeImprescindible().contains("Certificado de descuento")})
+			assert.that(barrileteCosmico.todosLosDestinosPoseenCertificadoDeDescuento())
 		}
 	
 	test "Silver's Sea no es un destino peligroso" {
