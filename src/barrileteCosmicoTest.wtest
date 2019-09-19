@@ -9,10 +9,8 @@ describe "Barrilete Cósmico" {
 	var pHari
 	
 	fixture{
-		garlicSea = new Destino()
-		garlicSea.nombre("Garlic´s Sea")
-		garlicSea.equipajeImprescindible(["Caña de Pescar", "Piloto"])
-		garlicSea.precio(2500)
+		garlicSea = new Destino(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"], precio= 2500)
+		
 		
 		silverSea = new Destino()
 		silverSea.nombre("Silver´s Sea")
