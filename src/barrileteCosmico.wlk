@@ -2,10 +2,6 @@ object barrileteCosmico{
 	
 	var destinos = #{}
 	
-	method destinos() {
-		return destinos
-	}
-	
 	method destinosMasImportantes() {
 		return destinos.filter{
 			destino =>
@@ -39,6 +35,8 @@ object barrileteCosmico{
 		destinos.add(unDestino)
 	}
 	
+	method destinos() = destinos
+	
 }
 
 class Destino{
@@ -62,8 +60,6 @@ class Destino{
 		}
 	}
 
-	
-	
 	method nombre(unNombre){
 		nombre = unNombre
 	}
@@ -106,10 +102,6 @@ class Usuario{
 		unUsuario.seguirA(self)
 	}
 	
-	method saldo(){
-		return saldo
-	}
-	method lugaresVisitados(){
-		return lugaresVisitados
-	}
+	method saldo() = saldo
+	method lugaresVisitados() = lugaresVisitados
 }
