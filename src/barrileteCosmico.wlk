@@ -62,8 +62,12 @@ class Destino{
 	method esPeligroso() {
 		return equipajeImprescindible.any{
 			equipaje =>
-				equipaje.toLowerCase().contains("vacuna")
+				self.esVacuna(equipaje)
 		}
+	}
+	
+	method esVacuna(equipaje){
+		return equipaje.toLowerCase().contains("vacuna")
 	}
 	
 	method precio() = precio
