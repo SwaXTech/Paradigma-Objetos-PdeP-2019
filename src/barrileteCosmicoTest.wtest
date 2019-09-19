@@ -72,7 +72,7 @@ describe "Barrilete Cósmico" {
 	test "PHari vuela a Silver's Sea" {
 		assert.that(pHari.puedeViajar(silverSea))
 		pHari.volarA(silverSea)
-		assert.that(pHari.lugaresVisitados().contains(silverSea))
+		assert.that(pHari.realizoViajeA(silverSea))
 	}
 	test "PHari vuela a Silver's Sea y se le descuenta dinero"{
 		pHari.volarA(silverSea)

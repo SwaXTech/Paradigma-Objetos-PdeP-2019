@@ -100,6 +100,10 @@ class Usuario{
 		unUsuario.seguirA(self)
 	}
 	
+	method realizoViajeA(unLugar){
+		return lugaresVisitados.contains(unLugar)
+	}
+	
 	method saldo() = saldo
 	method lugaresVisitados() = lugaresVisitados
 }
