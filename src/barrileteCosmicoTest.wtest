@@ -12,31 +12,23 @@ describe "Barrilete Cósmico" {
 		garlicSea = new Destino(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"], precio= 2500)
 		
 		
-		silverSea = new Destino()
-		silverSea.nombre("Silver´s Sea")
-		silverSea.equipajeImprescindible(["Protector Solar", "Equipo de Buceo"])
-		silverSea.precio(1350)
+		silverSea = new Destino(nombre = "Silver's Sea", equipajeImprescindible = ["Protector Solar", "Equipo de Buceo"], precio= 1350)
 		
-		lastToninas = new Destino()
+		
+		lastToninas = new Destino(nombre = "Last Toninas", equipajeImprescindible = ["Vacuna Gripal","Vacuna B","Necronomicon"], precio= 3500)
 		lastToninas.nombre("Last Toninas")
 		lastToninas.equipajeImprescindible(["Vacuna Gripal", "Vacuna B", "Necronomicon"])
 		lastToninas.precio(3500)
 		
-		goodAirs = new Destino()
-		goodAirs.nombre("Good Airs")
-		goodAirs.equipajeImprescindible(["Cerveza", "Protector Solar"])
-		goodAirs.precio(1500)	
+		goodAirs = new Destino(nombre = "Good Airs", equipajeImprescindible = ["Cerveza", "Protector Solar"], precio= 1500)
+			
 		
 		barrileteCosmico.agregarDestino(garlicSea)
 		barrileteCosmico.agregarDestino(silverSea)	
 		barrileteCosmico.agregarDestino(lastToninas)	
 		barrileteCosmico.agregarDestino(goodAirs)
 		
-		pHari = new Usuario()
-		pHari.nombre("Pablo Hari")
-		pHari.nombreDeUsuario("PHari")
-		pHari.lugaresVisitados(#{lastToninas, goodAirs})
-		pHari.saldo(1500)
+		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", lugaresVisitados = #{lastToninas, goodAirs}, saldo=1500)
 		
 	}
 	
