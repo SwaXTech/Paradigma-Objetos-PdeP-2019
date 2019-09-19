@@ -41,8 +41,8 @@ object barrileteCosmico{
 
 class Destino{
 	var nombre
-	var property equipajeImprescindible = []
-	var property precio
+	var equipajeImprescindible = []
+	var precio
 	
 	method esImportante() {
 		return precio > 2000
@@ -63,6 +63,9 @@ class Destino{
 	method nombre(unNombre){
 		nombre = unNombre
 	}
+	
+	method precio() = precio
+	method equipajeImprescindible() = equipajeImprescindible
 	
 }
 
