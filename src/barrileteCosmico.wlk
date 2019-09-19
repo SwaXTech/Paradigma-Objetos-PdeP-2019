@@ -59,10 +59,6 @@ class Destino{
 				equipaje.toLowerCase().contains("vacuna")
 		}
 	}
-
-	method nombre(unNombre){
-		nombre = unNombre
-	}
 	
 	method precio() = precio
 	method equipajeImprescindible() = equipajeImprescindible
@@ -80,9 +76,8 @@ class Usuario{
 		if(self.puedeViajar(unLugar)){
 			lugaresVisitados.add(unLugar) 
 			saldo = saldo - unLugar.precio() 
-			return true
 		} else {
-			return false
+			throw new NoSePuedeVolarException(message = "No se cuenta con saldo suficiente para realizar el vuelo")
 		}
 	}
 	
@@ -108,3 +103,5 @@ class Usuario{
 	method saldo() = saldo
 	method lugaresVisitados() = lugaresVisitados
 }
+
+class NoSePuedeVolarException inherits Exception{}
