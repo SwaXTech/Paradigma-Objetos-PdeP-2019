@@ -9,19 +9,10 @@ describe "Barrilete Cósmico" {
 	var pHari
 	
 	fixture{
-		garlicSea = new Destino(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"], precio= 2500)
-		
-		
-		silverSea = new Destino(nombre = "Silver's Sea", equipajeImprescindible = ["Protector Solar", "Equipo de Buceo"], precio= 1350)
-		
-		
+		garlicSea   = new Destino(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500)
+		silverSea   = new Destino(nombre = "Silver's Sea", equipajeImprescindible = ["Protector Solar", "Equipo de Buceo"],      precio= 1350)
 		lastToninas = new Destino(nombre = "Last Toninas", equipajeImprescindible = ["Vacuna Gripal","Vacuna B","Necronomicon"], precio= 3500)
-		lastToninas.nombre("Last Toninas")
-		lastToninas.equipajeImprescindible(["Vacuna Gripal", "Vacuna B", "Necronomicon"])
-		lastToninas.precio(3500)
-		
-		goodAirs = new Destino(nombre = "Good Airs", equipajeImprescindible = ["Cerveza", "Protector Solar"], precio= 1500)
-			
+		goodAirs    = new Destino(nombre = "Good Airs",    equipajeImprescindible = ["Cerveza", "Protector Solar"],              precio= 1500)
 		
 		barrileteCosmico.agregarDestino(garlicSea)
 		barrileteCosmico.agregarDestino(silverSea)	
