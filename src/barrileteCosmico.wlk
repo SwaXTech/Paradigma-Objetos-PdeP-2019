@@ -49,7 +49,7 @@ object barrileteCosmico{
 }
 
 class Destino{
-	var property nombre
+	var nombre
 	var property equipajeImprescindible = []
 	var property precio
 	
@@ -68,14 +68,21 @@ class Destino{
 				equipaje.toLowerCase().contains("vacuna")
 		}
 	}
+
+	
+	
+	method nombre(unNombre){
+		nombre = unNombre
+	}
+	
 }
 
 class Usuario{
-	var property nombre
-	var property nombreDeUsuario
-	var property lugaresVisitados = #{}
+	var nombre
+	var nombreDeUsuario
+	var lugaresVisitados = #{}
 	var siguiendo = #{}
-	var property saldo
+	var saldo
 	
 	method volarA(unLugar){
 		if(self.puedeViajar(unLugar)){
@@ -100,5 +107,11 @@ class Usuario{
 	method seguirA(unUsuario){
 		siguiendo.add(unUsuario) 
 		unUsuario.seguirA(self)
+	}
+	method saldo(){
+		return saldo
+	}
+	method lugaresVisitados(){
+		return lugaresVisitados
 	}
 }
