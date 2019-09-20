@@ -37,7 +37,7 @@ object barrileteCosmico{
 	method todosLosDestinosPoseenCertificadoDeDescuento(){
 		return destinos.all{
 			destino => 
-				destino.equipajeImprescindible().contains("Certificado de descuento")
+				destino.poseeCertificadoDeDescuento();
 		}
 	}
 	
@@ -70,8 +70,13 @@ class Destino{
 		return equipaje.toLowerCase().contains("vacuna")
 	}
 	
+	method poseeCertificadoDeDescuento(){
+		return equipajeImprescindible.contains("Certificado de descuento")
+	}
+	
 	method precio() = precio
 	method equipajeImprescindible() = equipajeImprescindible
+	
 	
 }
 
