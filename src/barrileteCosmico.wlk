@@ -41,6 +41,13 @@ object barrileteCosmico{
 		}
 	}
 	
+	method cartaDeDestinos(){
+		return destinos.map{
+			destino => 
+				destino.nombre()
+		}.asSet()
+	}
+	
 	method destinos() = destinos
 	
 }
@@ -75,6 +82,7 @@ class Destino{
 	}
 	
 	method precio() = precio
+	method nombre() = nombre
 	method equipajeImprescindible() = equipajeImprescindible
 	
 	

@@ -9,15 +9,15 @@ describe "Barrilete Cósmico" {
 	var pHari
 	
 	fixture{
-		garlicSea   = new Destino(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500)
-		silverSea   = new Destino(nombre = "Silver's Sea", equipajeImprescindible = ["Protector Solar", "Equipo de Buceo"],      precio= 1350)
 		lastToninas = new Destino(nombre = "Last Toninas", equipajeImprescindible = ["Vacuna Gripal","Vacuna B","Necronomicon"], precio= 3500)
+		garlicSea   = new Destino(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500)
 		goodAirs    = new Destino(nombre = "Good Airs",    equipajeImprescindible = ["Cerveza", "Protector Solar"],              precio= 1500)
+		silverSea   = new Destino(nombre = "Silver's Sea", equipajeImprescindible = ["Protector Solar", "Equipo de Buceo"],      precio= 1350)
 		
-		barrileteCosmico.agregarDestino(garlicSea)
-		barrileteCosmico.agregarDestino(silverSea)	
 		barrileteCosmico.agregarDestino(lastToninas)	
+		barrileteCosmico.agregarDestino(garlicSea)
 		barrileteCosmico.agregarDestino(goodAirs)
+		barrileteCosmico.agregarDestino(silverSea)	
 		
 		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", lugaresVisitados = #{lastToninas, goodAirs}, saldo=1500)
 		
@@ -64,7 +64,8 @@ describe "Barrilete Cósmico" {
 		assert.that(barrileteCosmico.esEmpresaExtrema())
 	}
 	test "Carta de destinos de Barrilete Cosmico"{
-		assert.equals(#{lastToninas, garlicSea, goodAirs, silverSea}, barrileteCosmico.destinos())
+		assert.equals(#{"Last Toninas", "Garlic's Sea", "Good Airs", "Silver's Sea"}, barrileteCosmico.cartaDeDestinos())
+	
 	}
 	test "Los kilometros de PHari son 500" {
 		assert.equals(500, pHari.obtenerKM())
