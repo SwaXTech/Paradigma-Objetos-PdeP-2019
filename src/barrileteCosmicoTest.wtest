@@ -84,7 +84,7 @@ describe "Barrilete Cósmico" {
 	}
 	
 	test "Los kilometros de PHari son 440" {
-		assert.equals(500, pHari.obtenerKM())
+		assert.equals(440, pHari.obtenerKM())
 	}
 	
 	test "PHari vuela a Silver's Sea" {
