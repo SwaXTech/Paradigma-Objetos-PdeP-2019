@@ -5,7 +5,7 @@ object barrileteCosmico{
 	method destinosMasImportantes() {
 		return destinos.filter{
 			destino =>
-				destino.esImportante()
+				destino.esDestacado()
 		}
 	}
 	
@@ -57,7 +57,7 @@ class Destino{
 	var equipajeImprescindible = []
 	var precio
 	
-	method esImportante() {
+	method esDestacado() {
 		return precio > 2000
 	}
 	
@@ -69,11 +69,11 @@ class Destino{
 	method esPeligroso() {
 		return equipajeImprescindible.any{
 			equipaje =>
-				self.esVacuna(equipaje)
+				self.requiereLlevarVacuna(equipaje)
 		}
 	}
 	
-	method esVacuna(equipaje){
+	method requiereLlevarVacuna(equipaje){
 		return equipaje.toLowerCase().contains("vacuna")
 	}
 	
@@ -96,11 +96,15 @@ class Usuario{
 	var saldo
 	
 	method volarA(unLugar){
-		if(self.puedeViajar(unLugar)){
-			lugaresVisitados.add(unLugar) 
-			saldo = saldo - unLugar.precio() 
-		} else {
-			throw new NoSePuedeVolarException(message = "No se cuenta con saldo suficiente para realizar el vuelo")
+		self.validarQuePuedaViajar(unLugar)	
+	
+		lugaresVisitados.add(unLugar) 
+		saldo = saldo - unLugar.precio()
+	}
+	
+	method validarQuePuedaViajar(unLugar) {
+		if (self.puedeViajar(unLugar).negate()) {
+			throw new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el vuelo")	
 		}
 	}
 	
@@ -119,8 +123,14 @@ class Usuario{
 	}
 	
 	method seguirA(unUsuario){
-		siguiendo.add(unUsuario) 
-		unUsuario.seguirA(self)
+		if (self.estaSiguiendoA(unUsuario).negate()) {
+			siguiendo.add(unUsuario)
+			unUsuario.seguirA(self)			
+		}
+	}
+	
+	method estaSiguiendoA(unUsuario) {
+		return siguiendo.contains(unUsuario)
 	}
 	
 	method realizoViajeA(unLugar){
@@ -131,4 +141,4 @@ class Usuario{
 	method lugaresVisitados() = lugaresVisitados
 }
 
-class NoSePuedeVolarException inherits Exception{}
+class VuelosUsuarioException inherits Exception{}

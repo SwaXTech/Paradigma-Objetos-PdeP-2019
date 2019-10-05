@@ -84,7 +84,7 @@ describe "Barrilete Cósmico" {
 	}
 	test "PHari intenta volar a Last Toninas, pero no le alcanza el dinero" {
 		assert.throwsExceptionLike(
-			new NoSePuedeVolarException(message = "No se cuenta con saldo suficiente para realizar el vuelo"), 
+			new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el vuelo"), 
 			{ 
 				pHari.volarA(lastToninas)
 			}
