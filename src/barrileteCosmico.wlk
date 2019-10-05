@@ -111,14 +111,14 @@ class MedioDeTransporte {
 }
 
 class Viaje {
-	var property localidadInicial
-	var property localidadFinal
+	var localidadInicial
+	var localidadFinal
 	var medioDeTransporte
 	method precioViaje(){
 		return localidadFinal.precio() + localidadInicial.distanciaA(localidadFinal)* medioDeTransporte.costoKm()
 	}
-	//method localidadInicial() = localidadInicial
-//	method localidadFinal() = localidadFinal
+	method localidadInicial() = localidadInicial
+	method localidadFinal() = localidadFinal
 }
 
 class Usuario{
