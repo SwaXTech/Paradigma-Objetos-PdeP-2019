@@ -7,12 +7,13 @@ describe "Barrilete Cósmico" {
 	var lastToninas
 	var goodAirs
 	var pHari
+	var cumbanchaVolante
 	
 	fixture{
-		garlicSea   = new Destino(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500)
-		silverSea   = new Destino(nombre = "Silver's Sea", equipajeImprescindible = ["Protector Solar", "Equipo de Buceo"],      precio= 1350)
-		lastToninas = new Destino(nombre = "Last Toninas", equipajeImprescindible = ["Vacuna Gripal","Vacuna B","Necronomicon"], precio= 3500)
-		goodAirs    = new Destino(nombre = "Good Airs",    equipajeImprescindible = ["Cerveza", "Protector Solar"],              precio= 1500)
+		garlicSea   = new Localidad(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500, kmUbicacion = 365)
+		silverSea   = new Localidad(nombre = "Silver's Sea", equipajeImprescindible = ["Protector Solar", "Equipo de Buceo"],      precio= 1350, kmUbicacion = 415)
+		lastToninas = new Localidad(nombre = "Last Toninas", equipajeImprescindible = ["Vacuna Gripal","Vacuna B","Necronomicon"], precio= 3500, kmUbicacion = 340)
+		goodAirs    = new Localidad(nombre = "Good Airs",    equipajeImprescindible = ["Cerveza", "Protector Solar"],              precio= 1500, kmUbicacion = 0)
 		
 		barrileteCosmico.agregarDestino(garlicSea)
 		barrileteCosmico.agregarDestino(silverSea)	
@@ -21,6 +22,8 @@ describe "Barrilete Cósmico" {
 		
 		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", lugaresVisitados = #{lastToninas, goodAirs}, saldo=1500)
 		
+		cumbanchaVolante = new MedioDeTransporte(costoKm = 25, minutosKm = 0.0017)   // Dije suba
+		barrileteCosmico.agregarMedioDeTransporte(cumbanchaVolante)
 	}
 	
 	test "Los destinos más importantes de Barrilete Cósmico son: Garlic's Sea y Last Toninas"{
@@ -63,6 +66,7 @@ describe "Barrilete Cósmico" {
 	test "Barrilete cósmico es una empresa extrema" {
 		assert.that(barrileteCosmico.esEmpresaExtrema())
 	}
+	
 	test "Carta de destinos de Barrilete Cosmico"{
 		assert.equals(
 			#{"Last Toninas", "Garlic's Sea", "Good Airs", "Silver's Sea"}, 
@@ -70,18 +74,22 @@ describe "Barrilete Cósmico" {
 		)
 	
 	}
+	
 	test "Los kilometros de PHari son 500" {
 		assert.equals(500, pHari.obtenerKM())
 	}
+	
 	test "PHari vuela a Silver's Sea" {
 		assert.that(pHari.puedeViajar(silverSea))
 		pHari.volarA(silverSea)
 		assert.that(pHari.realizoViajeA(silverSea))
 	}
+	
 	test "PHari vuela a Silver's Sea y se le descuenta dinero"{
 		pHari.volarA(silverSea)
 		assert.equals(150, pHari.saldo())
 	}
+	
 	test "PHari intenta volar a Last Toninas, pero no le alcanza el dinero" {
 		assert.throwsExceptionLike(
 			new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el vuelo"), 
@@ -90,4 +98,28 @@ describe "Barrilete Cósmico" {
 			}
 		)
 	}
+	
+	// TP 2
+	
+	// Medios de transporte
+	
+	test "La cumbancha volante tarda 17 minutos entre Nueva York y el Congo Belga (10,260.80 km a una velocidad promedio de 36211,76km/h, lo que hace un km en 0,0017 minutos)" {
+		assert.equals(0.0017, cumbanchaVolante.minutosKm())
+	}
+	
+	// Localidades
+	test "La distancia entre Good Airs y Silver's Sea es de 415 y viceversa" {
+		assert.equals(415, goodAirs.distanciaA(silverSea))
+		assert.equals(415, silverSea.distanciaA(goodAirs))
+	}
+	
+	test "La distancia entre Last Toninas y Garlic's Sea es de 25 y viceversa" {
+		assert.equals(25, lastToninas.distanciaA(garlicSea))
+		assert.equals(25, garlicSea.distanciaA(lastToninas))
+	}
+	
+	test "La distancia entre Last Toninas y Last Toninas es 0" {
+		assert.equals(0, lastToninas.distanciaA(lastToninas))
+	}
+	
 }

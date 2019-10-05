@@ -1,6 +1,7 @@
 object barrileteCosmico{
 	
 	var destinos = #{}
+	var mediosDeTransporte = #{}
 	
 	method destinosMasImportantes() {
 		return destinos.filter{
@@ -34,6 +35,10 @@ object barrileteCosmico{
 		destinos.add(unDestino)
 	}
 	
+	method agregarMedioDeTransporte(unTransporte) {
+		mediosDeTransporte.add(unTransporte)
+	}
+	
 	method todosLosDestinosPoseenCertificadoDeDescuento(){
 		return destinos.all{
 			destino => 
@@ -48,6 +53,7 @@ object barrileteCosmico{
 		}.asSet()
 	}
 	
+	method mediosDeTransporte() = mediosDeTransporte
 	method destinos() = destinos
 	
 }
@@ -84,8 +90,24 @@ class Destino{
 	method precio() = precio
 	method nombre() = nombre
 	method equipajeImprescindible() = equipajeImprescindible
+}
+
+class Localidad inherits Destino {
+	var kmUbicacion
 	
+	method kmUbicacion() = kmUbicacion
 	
+	method distanciaA(unaLocalidad) {
+		return (kmUbicacion - unaLocalidad.kmUbicacion()).abs()
+	}
+}
+
+class MedioDeTransporte {
+	var costoKm
+	var minutosKm  // Cuantos minutos tarda en hacer un km
+	
+	method costoKm() = costoKm
+	method minutosKm() = minutosKm
 }
 
 class Usuario{
