@@ -8,6 +8,9 @@ describe "Barrilete Cósmico" {
 	var goodAirs
 	var pHari
 	var cumbanchaVolante
+	var el114
+	var goodAirsASilverSea
+	var lastToninasAGarlicSea
 	
 	fixture{
 		garlicSea   = new Localidad(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500, kmUbicacion = 365)
@@ -20,10 +23,15 @@ describe "Barrilete Cósmico" {
 		barrileteCosmico.agregarDestino(lastToninas)	
 		barrileteCosmico.agregarDestino(goodAirs)
 		
-		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", lugaresVisitados = #{lastToninas, goodAirs}, saldo=1500)
+		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", viajesRealizados = #{lastToninasAGarlicSea, goodAirsASilverSea}, saldo=1500, localidadDeOrigen = lastToninas)
 		
 		cumbanchaVolante = new MedioDeTransporte(costoKm = 25, minutosKm = 0.0017)   // Dije suba
+		el114 = new MedioDeTransporte(costoKm = 10, minutosKm = 5)
 		barrileteCosmico.agregarMedioDeTransporte(cumbanchaVolante)
+		barrileteCosmico.agregarMedioDeTransporte(el114)
+		goodAirsASilverSea = new Viaje(localidadInicial = goodAirs, localidadFinal = silverSea, medioDeTransporte= cumbanchaVolante)
+		lastToninasAGarlicSea = new Viaje(localidadInicial = lastToninas, localidadFinal = garlicSea, medioDeTransporte= el114)
+		
 	}
 	
 	test "Los destinos más importantes de Barrilete Cósmico son: Garlic's Sea y Last Toninas"{
@@ -75,7 +83,7 @@ describe "Barrilete Cósmico" {
 	
 	}
 	
-	test "Los kilometros de PHari son 500" {
+	test "Los kilometros de PHari son 440" {
 		assert.equals(500, pHari.obtenerKM())
 	}
 	
@@ -121,5 +129,12 @@ describe "Barrilete Cósmico" {
 	test "La distancia entre Last Toninas y Last Toninas es 0" {
 		assert.equals(0, lastToninas.distanciaA(lastToninas))
 	}
-	
+	//viajes
+	test "El costo entre Good Airs y Silver's Sea en la cumbancha volante es de $11725" {
+		assert.equals(11725 ,goodAirsASilverSea.precioViaje())
+	}
+	test "El costo entre Last Toninas y Garlic's Sea en el 114 es de $2750" {
+				assert.equals(2750 ,lastToninasAGarlicSea.precioViaje())
+		
+	}
 }

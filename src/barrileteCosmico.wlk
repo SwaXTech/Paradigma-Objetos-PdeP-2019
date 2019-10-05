@@ -110,45 +110,49 @@ class MedioDeTransporte {
 	method minutosKm() = minutosKm
 }
 
-class viaje {
-	method precioViaje(localidadInicial, localidadFinal, medioDeTransporte){
+class Viaje {
+	var property localidadInicial
+	var property localidadFinal
+	var medioDeTransporte
+	method precioViaje(){
 		return localidadFinal.precio() + localidadInicial.distanciaA(localidadFinal)* medioDeTransporte.costoKm()
 	}
+	//method localidadInicial() = localidadInicial
+//	method localidadFinal() = localidadFinal
 }
 
 class Usuario{
 	var nombre
 	var nombreDeUsuario
-	var lugaresVisitados = #{}
+	var viajesRealizados = #{}	
 	var siguiendo = #{}
 	var saldo
+	var localidadDeOrigen
 	
-	method volarA(unLugar){
+	method viajarA(unLugar){
 		self.validarQuePuedaViajar(unLugar)	
 	
 		lugaresVisitados.add(unLugar) 
 		saldo = saldo - unLugar.precio()
 	}
 	
-	method validarQuePuedaViajar(unLugar) {
-		if (self.puedeViajar(unLugar).negate()) {
-			throw new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el vuelo")	
+	method validarQuePuedaViajar(viaje) {
+		if (self.puedeViajar(viaje).negate()) {
+			throw new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje")	
 		}
 	}
 	
-	method puedeViajar(unLugar){
-		return saldo >= unLugar.precio()
+	method puedeViajar(viaje){
+		return saldo >= viaje.precioViaje()
 	}
 	
 	method obtenerKM(){
-		return self.sumaDePreciosDeLosDestinos() * 0.10
+		return viajesRealizados.sum({
+			viaje =>
+			viaje.localidadInicial().distanciaA(viaje.localidadFinal())
+		})
 	}
 	
-	method sumaDePreciosDeLosDestinos() {
-		return lugaresVisitados.sum({ 
-			lugarVisitado => 
-				lugarVisitado.precio()})
-	}
 	
 	method seguirA(unUsuario){
 		if (self.estaSiguiendoA(unUsuario).negate()) {
@@ -162,11 +166,14 @@ class Usuario{
 	}
 	
 	method realizoViajeA(unLugar){
-		return lugaresVisitados.contains(unLugar)
+		return viajesRealizados.any({
+			viaje =>
+			viaje.LocalidadFinal() == unLugar 
+		})
 	}
 	
 	method saldo() = saldo
-	method lugaresVisitados() = lugaresVisitados
+	method viajesRealizados() = viajesRealizados
 }
 
 class VuelosUsuarioException inherits Exception{}
