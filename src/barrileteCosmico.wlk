@@ -110,6 +110,12 @@ class MedioDeTransporte {
 	method minutosKm() = minutosKm
 }
 
+class viaje {
+	method precioViaje(localidadInicial, localidadFinal, medioDeTransporte){
+		return localidadFinal.precio() + localidadInicial.distanciaA(localidadFinal)* medioDeTransporte.costoKm()
+	}
+}
+
 class Usuario{
 	var nombre
 	var nombreDeUsuario
