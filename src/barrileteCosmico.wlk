@@ -58,10 +58,12 @@ object barrileteCosmico{
 	
 }
 
-class Destino{
+class Localidad{
 	var nombre
 	var equipajeImprescindible = []
 	var precio
+	var kmUbicacion
+	
 	
 	method esDestacado() {
 		return precio > 2000
@@ -86,21 +88,19 @@ class Destino{
 	method poseeCertificadoDeDescuento(){
 		return equipajeImprescindible.contains("Certificado de descuento")
 	}
-	
-	method precio() = precio
-	method nombre() = nombre
-	method equipajeImprescindible() = equipajeImprescindible
-}
-
-class Localidad inherits Destino {
-	var kmUbicacion
-	
-	method kmUbicacion() = kmUbicacion
+		
 	
 	method distanciaA(unaLocalidad) {
 		return (kmUbicacion - unaLocalidad.kmUbicacion()).abs()
 	}
+	
+	method precio() = precio
+	method nombre() = nombre
+	method equipajeImprescindible() = equipajeImprescindible
+	method kmUbicacion() = kmUbicacion
+	
 }
+
 
 class MedioDeTransporte {
 	var costoKm
@@ -116,6 +116,9 @@ class Viaje {
 	var medioDeTransporte
 	method precioViaje(){
 		return localidadFinal.precio() + localidadInicial.distanciaA(localidadFinal)* medioDeTransporte.costoKm()
+	}
+	method distanciaViaje(){
+		return self.localidadInicial().distanciaA(self.localidadFinal())
 	}
 	method localidadInicial() = localidadInicial
 	method localidadFinal() = localidadFinal
@@ -149,13 +152,13 @@ class Usuario{
 	method obtenerKM(){
 		return viajesRealizados.sum({
 			viaje =>
-			viaje.localidadInicial().distanciaA(viaje.localidadFinal())
+			viaje.distanciaViaje()
 		})
 	}
 	
 	
 	method seguirA(unUsuario){
-		if (self.estaSiguiendoA(unUsuario).negate()) {
+		if (self.estaSiguiendoA(unUsuario).negate()) 	{
 			siguiendo.add(unUsuario)
 			unUsuario.seguirA(self)			
 		}
