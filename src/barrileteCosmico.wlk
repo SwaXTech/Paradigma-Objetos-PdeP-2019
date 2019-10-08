@@ -135,7 +135,7 @@ class Usuario{
 	method viajarA(unLugar){
 		self.validarQuePuedaViajar(unLugar)	
 	
-		lugaresVisitados.add(unLugar) 
+		viajesRealizados.add(unLugar) 
 		saldo = saldo - unLugar.precio()
 	}
 	
