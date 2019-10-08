@@ -137,16 +137,17 @@ class Viaje {
 class Usuario{
 	var nombre
 	var nombreDeUsuario
-	var viajesRealizados = #{}	
+	var viajesRealizados = #{}
 	var siguiendo = #{}
 	var saldo
 	var localidadDeOrigen
 	
-	method viajarA(unLugar){
-		self.validarQuePuedaViajar(unLugar)	
+	method viajarA(unViaje){
+		self.validarQuePuedaViajar(unViaje)	
 	
-		viajesRealizados.add(unLugar) 
-		saldo = saldo - unLugar.precio()
+		viajesRealizados.add(unViaje) 
+		localidadDeOrigen = unViaje.localidadFinal()
+		saldo = saldo - unViaje.precioViaje()
 	}
 	
 	method validarQuePuedaViajar(viaje) {
@@ -162,7 +163,7 @@ class Usuario{
 	method obtenerKM(){
 		return viajesRealizados.sum({
 			viaje =>
-			viaje.distanciaViaje()
+				viaje.distanciaViaje()
 		})
 	}
 	
@@ -181,7 +182,7 @@ class Usuario{
 	method realizoViajeA(unLugar){
 		return viajesRealizados.any({
 			viaje =>
-			viaje.LocalidadFinal() == unLugar 
+				viaje.LocalidadFinal() == unLugar 
 		})
 	}
 	
