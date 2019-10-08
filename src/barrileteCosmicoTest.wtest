@@ -99,6 +99,7 @@ describe "Barrilete Cósmico" {
 	}
 	
 	test "PHari vuela a Silver's Sea y se le descuenta dinero"{
+		//Este viaje no puede ser armado por barrilete cósmico porque el medio de transporte es al azar y en este test no se contempla el tema saldo.
 		var viaje = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = silverSea, medioDeTransporte = cumbanchaVolante)
 		
 		pHari.viajarA(viaje)
@@ -138,7 +139,7 @@ describe "Barrilete Cósmico" {
 	test "La distancia entre Last Toninas y Last Toninas es 0" {
 		assert.equals(0, lastToninas.distanciaA(lastToninas))
 	}
-	//viajes
+	// Viajes
 	test "El costo entre Good Airs y Silver's Sea en la cumbancha volante es de $11725" {
 		assert.equals(11725 ,goodAirsASilverSea.precioViaje())
 	}
@@ -146,10 +147,20 @@ describe "Barrilete Cósmico" {
 		assert.equals(2750 ,lastToninasAGarlicSea.precioViaje())	
 	}
 	
+	//Barrilete cósmico
+	
+	test "Barrilete cósmico le arma un viaje a Pablo Hari a Silver´s Sea"{
+		var viaje = barrileteCosmico.armarUnViaje(pHari, silverSea)
+		assert.equals(viaje.localidadInicial(), pHari.localidadDeOrigen())
+		assert.equals(viaje.localidadFinal(), silverSea)
+	}
+	
 	test "Barrillete cósmico le arma un viaje a Pablo Hari a Good Airs y su nueva localidad de origen es Good Airs"{
 		var viajeAGoodAirs = barrileteCosmico.armarUnViaje(pHari, goodAirs)
 		pHari.viajarA(viajeAGoodAirs)
 		assert.equals(pHari.localidadDeOrigen(), goodAirs)
 	}
+	
+	
 
 }
