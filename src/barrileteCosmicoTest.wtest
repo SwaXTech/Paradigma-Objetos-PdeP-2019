@@ -30,6 +30,8 @@ describe "Barrilete Cósmico" {
 		lastToninasAGarlicSea = new Viaje(localidadInicial = lastToninas, localidadFinal = garlicSea, medioDeTransporte= el114)
 		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 10000, localidadDeOrigen = lastToninas)
 		
+		
+		
 	}
 	
 	test "Los destinos más importantes de Barrilete Cósmico son: Garlic's Sea y Last Toninas"{
@@ -82,6 +84,10 @@ describe "Barrilete Cósmico" {
 	}
 	
 	test "Los kilometros de PHari son 440" {
+		var viajeALastToninas = barrileteCosmico.armarUnViaje(pHari, lastToninas)
+		var viajeAGoodAirs    = barrileteCosmico.armarUnViaje(pHari, goodAirs)
+		pHari.viajarA(viajeALastToninas)
+		pHari.viajarA(viajeAGoodAirs)
 		assert.equals(440, pHari.obtenerKM())
 	}
 	
@@ -93,7 +99,8 @@ describe "Barrilete Cósmico" {
 	}
 	
 	test "PHari vuela a Silver's Sea y se le descuenta dinero"{
-		pHari.volarA(silverSea)
+		var viaje = barrileteCosmico.armarUnViaje(pHari, silverSea);
+		pHari.viajarA(viaje)
 		assert.equals(150, pHari.saldo())
 	}
 	
@@ -101,7 +108,8 @@ describe "Barrilete Cósmico" {
 		assert.throwsExceptionLike(
 			new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el vuelo"), 
 			{ 
-				pHari.volarA(lastToninas)
+				var viajeALastToninas  = barrileteCosmico.armarUnViaje(pHari, lastToninas)
+				pHari.viajarA(viajeALastToninas)
 			}
 		)
 	}

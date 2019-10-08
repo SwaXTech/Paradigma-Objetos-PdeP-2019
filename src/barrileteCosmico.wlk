@@ -125,7 +125,7 @@ class Viaje {
 	}
 	
 	method costoTransporte() {
-		return localidadInicial.distanciaA(localidadFinal)* medioDeTransporte.costoKm()
+		return localidadInicial.distanciaA(localidadFinal) * medioDeTransporte.costoKm()
 	}
 	
 	
