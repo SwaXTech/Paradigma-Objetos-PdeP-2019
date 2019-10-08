@@ -28,7 +28,7 @@ describe "Barrilete Cósmico" {
 		barrileteCosmico.agregarMedioDeTransporte(el114)
 		goodAirsASilverSea = new Viaje(localidadInicial = goodAirs, localidadFinal = silverSea, medioDeTransporte= cumbanchaVolante)
 		lastToninasAGarlicSea = new Viaje(localidadInicial = lastToninas, localidadFinal = garlicSea, medioDeTransporte= el114)
-		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 10000, localidadDeOrigen = lastToninas)
+		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 15000, localidadDeOrigen = lastToninas)
 		
 		
 		
@@ -83,32 +83,34 @@ describe "Barrilete Cósmico" {
 	
 	}
 	
-	test "Los kilometros de PHari son 440" {
-		var viajeALastToninas = barrileteCosmico.armarUnViaje(pHari, lastToninas)
-		var viajeAGoodAirs    = barrileteCosmico.armarUnViaje(pHari, goodAirs)
+	test "Los kilometros de PHari son 340" {
+		//Estos viajes no pueden ser armados por barrilete cósmico porque el medio de transporte es al azar y en este test no se contempla el tema saldo.
+		var viajeALastToninas = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = lastToninas, medioDeTransporte = cumbanchaVolante)
+		var viajeAGoodAirs    = new Viaje(localidadInicial = lastToninas, localidadFinal = goodAirs, medioDeTransporte = cumbanchaVolante)
 		pHari.viajarA(viajeALastToninas)
 		pHari.viajarA(viajeAGoodAirs)
-		assert.equals(440, pHari.obtenerKM())
+		assert.equals(340, pHari.obtenerKM())
 	}
 	
 	test "PHari vuela a Silver's Sea" {
-		//assert.that(pHari.puedeViajar(silverSea))
 		var viaje = barrileteCosmico.armarUnViaje(pHari, silverSea);
 		pHari.viajarA(viaje)
 		assert.that(pHari.realizoViajeA(silverSea))
 	}
 	
 	test "PHari vuela a Silver's Sea y se le descuenta dinero"{
-		var viaje = barrileteCosmico.armarUnViaje(pHari, silverSea);
+		var viaje = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = silverSea, medioDeTransporte = cumbanchaVolante)
+		
 		pHari.viajarA(viaje)
-		assert.equals(150, pHari.saldo())
+		assert.equals(11775, pHari.saldo())
 	}
 	
-	test "PHari intenta volar a Last Toninas, pero no le alcanza el dinero" {
+	test "PHari intenta volar a Garlic´s Sea, pero no le alcanza el dinero" {
 		assert.throwsExceptionLike(
-			new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el vuelo"), 
+			new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje"), 
 			{ 
-				var viajeALastToninas  = barrileteCosmico.armarUnViaje(pHari, lastToninas)
+				var unTransporteMuyCaro = new MedioDeTransporte(costoKm = 5000, minutosKm = 1)
+				var viajeALastToninas  = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = garlicSea, medioDeTransporte = unTransporteMuyCaro)
 				pHari.viajarA(viajeALastToninas)
 			}
 		)
@@ -141,7 +143,13 @@ describe "Barrilete Cósmico" {
 		assert.equals(11725 ,goodAirsASilverSea.precioViaje())
 	}
 	test "El costo entre Last Toninas y Garlic's Sea en el 114 es de $2750" {
-		assert.equals(2750 ,lastToninasAGarlicSea.precioViaje())
-		
+		assert.equals(2750 ,lastToninasAGarlicSea.precioViaje())	
 	}
+	
+	test "Barrillete cósmico le arma un viaje a Pablo Hari a Good Airs y su nueva localidad de origen es Good Airs"{
+		var viajeAGoodAirs = barrileteCosmico.armarUnViaje(pHari, goodAirs)
+		pHari.viajarA(viajeAGoodAirs)
+		assert.equals(pHari.localidadDeOrigen(), goodAirs)
+	}
+
 }
