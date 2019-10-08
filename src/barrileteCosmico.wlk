@@ -148,6 +148,7 @@ class Usuario{
 		self.actualizarViajesRealizados(unViaje) 
 		self.actualizarLocalidad(unViaje)
 		self.actualizarSaldo(unViaje)
+		
 	}
 	
 	method actualizarViajesRealizados(unViaje) {
@@ -199,7 +200,12 @@ class Usuario{
 	}
 	
 	method saldo() = saldo
-	method viajesRealizados() = viajesRealizados
+	method viajes(){
+		return viajesRealizados.map{
+			viaje =>
+				viaje.localidadFinal()
+		}
+	}
 }
 
 class VuelosUsuarioException inherits Exception{}
