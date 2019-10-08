@@ -204,10 +204,11 @@ class Usuario{
 	}
 	
 	method elDestinoDelViajeEs(viaje, unLugar) {
-		viaje.localidadFinal() == unLugar
+		return viaje.localidadFinal() == unLugar
 	}
 	
 	method saldo() = saldo
+	method localidadDeOrigen() = localidadDeOrigen
 	method viajes(){
 		return viajesRealizados.map{
 			viaje =>
