@@ -114,12 +114,22 @@ class Viaje {
 	var localidadInicial
 	var localidadFinal
 	var medioDeTransporte
+	
+	
 	method precioViaje(){
-		return localidadFinal.precio() + localidadInicial.distanciaA(localidadFinal)* medioDeTransporte.costoKm()
+		return localidadFinal.precio() + self.costoTransporte()
 	}
+	
+	method costoTransporte() {
+		return localidadInicial.distanciaA(localidadFinal)* medioDeTransporte.costoKm()
+	}
+	
+	
 	method distanciaViaje(){
 		return self.localidadInicial().distanciaA(self.localidadFinal())
 	}
+	
+	
 	method localidadInicial() = localidadInicial
 	method localidadFinal() = localidadFinal
 }
