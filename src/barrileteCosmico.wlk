@@ -195,7 +195,7 @@ class Usuario{
 	method realizoViajeA(unLugar){
 		return viajesRealizados.any({
 			viaje =>
-				viaje.LocalidadFinal() == unLugar 
+				viaje.localidadFinal() == unLugar 
 		})
 	}
 	
