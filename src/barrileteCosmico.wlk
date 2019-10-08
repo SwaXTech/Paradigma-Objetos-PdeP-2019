@@ -143,11 +143,23 @@ class Usuario{
 	var localidadDeOrigen
 	
 	method viajarA(unViaje){
+		
 		self.validarQuePuedaViajar(unViaje)	
+		self.actualizarViajesRealizados(unViaje) 
+		self.actualizarLocalidad(unViaje)
+		self.actualizarSaldo(unViaje)
+	}
 	
-		viajesRealizados.add(unViaje) 
-		localidadDeOrigen = unViaje.localidadFinal()
+	method actualizarViajesRealizados(unViaje) {
+		viajesRealizados.add(unViaje)
+	}
+	
+	method actualizarSaldo(unViaje) {
 		saldo = saldo - unViaje.precioViaje()
+	}
+	
+	method actualizarLocalidad(unViaje) {
+		localidadDeOrigen = unViaje.localidadFinal()
 	}
 	
 	method validarQuePuedaViajar(viaje) {
