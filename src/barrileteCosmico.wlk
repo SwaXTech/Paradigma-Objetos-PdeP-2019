@@ -195,8 +195,12 @@ class Usuario{
 	method realizoViajeA(unLugar){
 		return viajesRealizados.any({
 			viaje =>
-				viaje.localidadFinal() == unLugar 
+				self.elDestinoDelViajeEs(viaje, unLugar) 
 		})
+	}
+	
+	method elDestinoDelViajeEs(viaje, unLugar) {
+		viaje.localidadFinal() == unLugar
 	}
 	
 	method saldo() = saldo
