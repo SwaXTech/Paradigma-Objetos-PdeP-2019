@@ -53,6 +53,10 @@ object barrileteCosmico{
 		}.asSet()
 	}
 	
+	method armarUnViaje(usuario, destino){
+		return new Viaje(localidadInicial = usuario.localidadDeOrigen(), localidadFinal = destino, medioDeTransporte = mediosDeTransporte.anyOne())
+	}
+	
 	method mediosDeTransporte() = mediosDeTransporte
 	method destinos() = destinos
 	
