@@ -18,10 +18,10 @@ describe "Barrilete Cósmico" {
 		lastToninas = new Localidad(nombre = "Last Toninas", equipajeImprescindible = ["Vacuna Gripal","Vacuna B","Necronomicon"], precio= 3500, kmUbicacion = 340)
 		goodAirs    = new Localidad(nombre = "Good Airs",    equipajeImprescindible = ["Cerveza", "Protector Solar"],              precio= 1500, kmUbicacion = 0)
 		
-		barrileteCosmico.agregarDestino(garlicSea)
-		barrileteCosmico.agregarDestino(silverSea)	
-		barrileteCosmico.agregarDestino(lastToninas)	
-		barrileteCosmico.agregarDestino(goodAirs)
+		barrileteCosmico.agregarLocalidad(garlicSea)
+		barrileteCosmico.agregarLocalidad(silverSea)	
+		barrileteCosmico.agregarLocalidad(lastToninas)	
+		barrileteCosmico.agregarLocalidad(goodAirs)
 		cumbanchaVolante = new MedioDeTransporte(costoKm = 25, minutosKm = 0.0017)   // Dije suba
 		el114 = new MedioDeTransporte(costoKm = 10, minutosKm = 5)
 		barrileteCosmico.agregarMedioDeTransporte(cumbanchaVolante)
@@ -34,8 +34,8 @@ describe "Barrilete Cósmico" {
 		
 	}
 	
-	test "Los destinos más importantes de Barrilete Cósmico son: Garlic's Sea y Last Toninas"{
-		assert.equals(barrileteCosmico.destinosMasImportantes(), #{garlicSea, lastToninas})
+	test "Las localidades más importantes de Barrilete Cósmico son: Garlic's Sea y Last Toninas"{
+		assert.equals(barrileteCosmico.localidadesMasImportantes(), #{garlicSea, lastToninas})
 	}
 	
 	test "Aplicar un descuento de 25% a Last Toninas, su precio es de $2625" {
@@ -60,15 +60,15 @@ describe "Barrilete Cósmico" {
 			assert.equals(1147.5, silverSea.precio())
 			assert.equals(2975, lastToninas.precio())
 			assert.equals(1275, goodAirs.precio())
-			assert.that(barrileteCosmico.todosLosDestinosPoseenCertificadoDeDescuento())
+			assert.that(barrileteCosmico.todasLasLocalidadesPoseenCertificadoDeDescuento())
 		}
 	
 	test "Silver's Sea no es un destino peligroso" {
-		assert.notThat(silverSea.esPeligroso())
+		assert.notThat(silverSea.esPeligrosa())
 	}
 	
 	test "Last Toninas es el único destino peligroso" {
-		assert.equals(#{lastToninas}, barrileteCosmico.destinosPeligrosos())
+		assert.equals(#{lastToninas}, barrileteCosmico.localidadesPeligrosas())
 	}
 	
 	test "Barrilete cósmico es una empresa extrema" {
@@ -78,7 +78,7 @@ describe "Barrilete Cósmico" {
 	test "Carta de destinos de Barrilete Cosmico"{
 		assert.equals(
 			#{"Last Toninas", "Garlic's Sea", "Good Airs", "Silver's Sea"}, 
-			barrileteCosmico.cartaDeDestinos()
+			barrileteCosmico.cartaDeLocalidades()
 		)
 	
 	}

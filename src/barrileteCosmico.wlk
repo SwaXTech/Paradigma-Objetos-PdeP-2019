@@ -1,55 +1,55 @@
 object barrileteCosmico{
 	
-	var destinos = #{}
+	var localidades = #{}
 	var mediosDeTransporte = #{}
 	
-	method destinosMasImportantes() {
-		return destinos.filter{
-			destino =>
-				destino.esDestacado()
+	method localidadesMasImportantes() {
+		return localidades.filter{
+			localidad =>
+				localidad.esDestacada()
 		}
 	}
 	
 	method aplicarDescuento(unDescuento) {
-		destinos.forEach{
-			destino => 
-				destino.aplicarDescuento(unDescuento)
+		localidades.forEach{
+			localidad => 
+				localidad.aplicarDescuento(unDescuento)
 		}
 	}
 	
 	method esEmpresaExtrema() {
-		return self.destinosMasImportantes().any{
-			destino =>
-				destino.esPeligroso()
+		return self.localidadesMasImportantes().any{
+			localidad =>
+				localidad.esPeligrosa()
 		}
 	}
 	
-	method destinosPeligrosos() {
-		return destinos.filter{
-			destino => 
-				destino.esPeligroso()
+	method localidadesPeligrosas() {
+		return localidades.filter{
+			localidad => 
+				localidad.esPeligrosa()
 		}
 	}
 	
-	method agregarDestino(unDestino) {
-		destinos.add(unDestino)
+	method agregarLocalidad(unaLocalidad) {
+		localidades.add(unaLocalidad)
 	}
 	
 	method agregarMedioDeTransporte(unTransporte) {
 		mediosDeTransporte.add(unTransporte)
 	}
 	
-	method todosLosDestinosPoseenCertificadoDeDescuento(){
-		return destinos.all{
-			destino => 
-				destino.poseeCertificadoDeDescuento();
+	method todasLasLocalidadesPoseenCertificadoDeDescuento(){
+		return localidades.all{
+			localidad => 
+				localidad.poseeCertificadoDeDescuento();
 		}
 	}
 	
-	method cartaDeDestinos(){
-		return destinos.map{
-			destino => 
-				destino.nombre()
+	method cartaDeLocalidades(){
+		return localidades.map{
+			localidad => 
+				localidad.nombre()
 		}.asSet()
 	}
 	
@@ -58,7 +58,7 @@ object barrileteCosmico{
 	}
 	
 	method mediosDeTransporte() = mediosDeTransporte
-	method destinos() = destinos
+	method localidades() = localidades
 	
 }
 
@@ -69,7 +69,7 @@ class Localidad{
 	var kmUbicacion
 	
 	
-	method esDestacado() {
+	method esDestacada() {
 		return precio > 2000
 	}
 	
@@ -78,7 +78,7 @@ class Localidad{
 		equipajeImprescindible.add("Certificado de descuento")	
 	}
 	
-	method esPeligroso() {
+	method esPeligrosa() {
 		return equipajeImprescindible.any{
 			equipaje =>
 				self.requiereLlevarVacuna(equipaje)
