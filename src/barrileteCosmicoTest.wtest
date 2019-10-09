@@ -162,6 +162,19 @@ describe "Barrilete Cósmico" {
 		assert.that(elDiegote.estaSiguiendoA(pHari).negate())
 	}
 	
+	test "elDiegote viaja a Good Airs, cuando ya esta ahi, por lo tanto no gasta nada" {
+		var viaje = barrileteCosmico.armarUnViaje(elDiegote, goodAirs);
+		pHari.viajarA(viaje)
+		assert.equals(3000000 ,elDiegote.saldo())
+	}
+	
+	test "elDiegote viaja a Good Airs, cuando ya esta ahi, por lo tanto no se registra como que viajo a dicha localidad" {
+		var viaje = barrileteCosmico.armarUnViaje(elDiegote, goodAirs);
+		pHari.viajarA(viaje)
+		assert.that(elDiegote.realizoViajeA(goodAirs).negate())
+	}
+	
+	
 	//Barrilete cósmico
 	
 	test "Barrilete cósmico le arma un viaje a Pablo Hari a Silver´s Sea"{
