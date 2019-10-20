@@ -105,6 +105,42 @@ class Localidad{
 	
 }
 
+class Playa inherits Localidad {
+	override method esPeligrosa() {
+		return false
+	}
+}
+
+class Montania inherits Localidad {
+	var altura
+	
+	override method esPeligrosa() {
+		return super() && altura > 5000
+	}
+	
+	override method esDestacada() {
+		return true
+	}
+}
+
+class CiudadHistorica inherits Localidad {
+	var museos
+	
+	override method esPeligrosa() {
+		return equipajeImprescindible.any{
+			equipaje =>
+				self.requiereLlevarSeguroAsistencia(equipaje)
+		}
+	}
+	
+	method requiereLlevarSeguroAsistencia(equipaje){
+		return equipaje.toLowerCase().contains("seguro de asistencia al viajero")
+	}
+	
+	override method esDestacada() {
+		return super() && museos >= 3
+	}
+}
 
 class MedioDeTransporte {
 	var costoKm
