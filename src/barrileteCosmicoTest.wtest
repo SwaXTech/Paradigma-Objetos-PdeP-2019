@@ -84,13 +84,23 @@ describe "Barrilete Cósmico" {
 	
 	}
 	
-	test "Los kilometros de PHari son 340" {
+	test "Los kilometros de PHari son 415" {
 		//Estos viajes no pueden ser armados por barrilete cósmico porque el medio de transporte es al azar y en este test no se contempla el tema saldo.
-		var viajeALastToninas = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = lastToninas, medioDeTransporte = cumbanchaVolante)
+		var viajeASilverSea = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = silverSea, medioDeTransporte = cumbanchaVolante)
 		var viajeAGoodAirs    = new Viaje(localidadInicial = lastToninas, localidadFinal = goodAirs, medioDeTransporte = cumbanchaVolante)
-		pHari.viajarA(viajeALastToninas)
+		pHari.viajarA(viajeASilverSea)
 		pHari.viajarA(viajeAGoodAirs)
-		assert.equals(340, pHari.obtenerKM())
+		assert.equals(415, pHari.obtenerKM())
+	}
+	
+	test "PHari vuela desde Last Toninas a Last Toninas y tira error" {
+		assert.throwsExceptionLike(
+			new VuelosUsuarioException(message = "Se encuentra en la misma localidad a la que quiere viajar"), 
+			{ 
+				var viajeALastToninas  = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = lastToninas, medioDeTransporte = cumbanchaVolante)
+				pHari.viajarA(viajeALastToninas)
+			}
+		)
 	}
 	
 	test "PHari vuela a Silver's Sea" {
@@ -112,8 +122,8 @@ describe "Barrilete Cósmico" {
 			new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje"), 
 			{ 
 				var unTransporteMuyCaro = new MedioDeTransporte(costoKm = 5000, minutosKm = 1)
-				var viajeALastToninas  = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = garlicSea, medioDeTransporte = unTransporteMuyCaro)
-				pHari.viajarA(viajeALastToninas)
+				var viajeAGarlicSea  = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = garlicSea, medioDeTransporte = unTransporteMuyCaro)
+				pHari.viajarA(viajeAGarlicSea)
 			}
 		)
 	}

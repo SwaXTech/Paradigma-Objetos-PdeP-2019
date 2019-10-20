@@ -175,10 +175,17 @@ class Usuario{
 		if (self.puedeViajar(viaje).negate()) {
 			throw new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje")	
 		}
+		if (self.estaEnlaMismaLocalidad(viaje)) {
+			throw new VuelosUsuarioException(message = "Se encuentra en la misma localidad a la que quiere viajar")
+		}
 	}
 	
 	method puedeViajar(viaje){
 		return saldo >= viaje.precioViaje()
+	}
+	
+	method estaEnlaMismaLocalidad(unViaje) {
+		return localidadDeOrigen.equals(unViaje.localidadFinal())
 	}
 	
 	method obtenerKM(){
