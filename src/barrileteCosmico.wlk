@@ -112,6 +112,10 @@ class MedioDeTransporte {
 	
 	method costoKm() = costoKm
 	method minutosKm() = minutosKm
+	
+	method costoViaje(unaDistancia) {
+		return costoKm * unaDistancia
+	}
 }
 
 class Viaje {
@@ -125,12 +129,12 @@ class Viaje {
 	}
 	
 	method costoTransporte() {
-		return localidadInicial.distanciaA(localidadFinal) * medioDeTransporte.costoKm()
+		return medioDeTransporte.costoViaje(self.distanciaViaje())
 	}
 	
 	
 	method distanciaViaje(){
-		return self.localidadInicial().distanciaA(self.localidadFinal())
+		return localidadInicial.distanciaA(localidadFinal)
 	}
 	
 	
