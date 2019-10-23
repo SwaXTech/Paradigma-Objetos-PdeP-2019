@@ -1,4 +1,8 @@
 import barrileteCosmico.*
+import usuario.*
+import medioDeTransporte.*
+import viaje.*
+import localidad.*
 
 describe "Barrilete Cósmico" {
 
