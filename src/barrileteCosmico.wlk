@@ -47,7 +47,7 @@ object barrileteCosmico{
 	method todasLasLocalidadesPoseenCertificadoDeDescuento(){
 		return localidades.all{
 			localidad => 
-				localidad.poseeCertificadoDeDescuento();
+				localidad.poseeItem("Certificado de descuento");
 		}
 	}
 	
@@ -64,5 +64,3 @@ object barrileteCosmico{
 	
 	method mediosDeTransporte() = mediosDeTransporte
 	method localidades() = localidades
-	
-}

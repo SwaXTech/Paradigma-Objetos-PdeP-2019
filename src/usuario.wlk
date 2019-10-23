@@ -5,6 +5,7 @@ class Usuario{
 	var siguiendo = #{}
 	var saldo
 	var localidadDeOrigen
+	var items = []
 	
 	method viajarA(unViaje){
 		
