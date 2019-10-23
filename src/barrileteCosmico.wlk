@@ -42,7 +42,7 @@ object barrileteCosmico{
 	method todasLasLocalidadesPoseenCertificadoDeDescuento(){
 		return localidades.all{
 			localidad => 
-				localidad.poseeCertificadoDeDescuento();
+				localidad.poseeItem("Certificado de descuento");
 		}
 	}
 	
@@ -89,8 +89,8 @@ class Localidad{
 		return equipaje.toLowerCase().contains("vacuna")
 	}
 	
-	method poseeCertificadoDeDescuento(){
-		return equipajeImprescindible.contains("Certificado de descuento")
+	method poseeItem(unItem){
+		return equipajeImprescindible.contains(unItem)
 	}
 		
 	
@@ -103,6 +103,23 @@ class Localidad{
 	method equipajeImprescindible() = equipajeImprescindible
 	method kmUbicacion() = kmUbicacion
 	
+}
+class Playa inherits Localidad{
+	override method esPeligrosa(){
+		return false
+	}
+}
+class Montania inherits Localidad{
+	var altura
+	override method esPeligrosa(){
+		return super() and altura >5000
+		
+	}
+}
+class CiudadHistorica inherits Localidad{
+	override method esPeligrosa(){
+		return true
+	}
 }
 
 
@@ -149,6 +166,7 @@ class Usuario{
 	var siguiendo = #{}
 	var saldo
 	var localidadDeOrigen
+	var items = []
 	
 	method viajarA(unViaje){
 		

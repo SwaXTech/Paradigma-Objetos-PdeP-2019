@@ -30,7 +30,7 @@ describe "Barrilete Cósmico" {
 		goodAirsASilverSea = new Viaje(localidadInicial = goodAirs, localidadFinal = silverSea, medioDeTransporte= cumbanchaVolante)
 		lastToninasAGarlicSea = new Viaje(localidadInicial = lastToninas, localidadFinal = garlicSea, medioDeTransporte= el114)
 		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 15000, localidadDeOrigen = lastToninas)
-		elDiegote = new Usuario(nombre = "Diego Maradona", nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs)
+		elDiegote = new Usuario(nombre = "Diego Maradona",  nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs)
 		
 		
 	}
