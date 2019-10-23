@@ -25,8 +25,8 @@ class Localidad{
 		return equipaje.toLowerCase().contains("vacuna")
 	}
 	
-	method poseeCertificadoDeDescuento(){
-		return equipajeImprescindible.contains("Certificado de descuento")
+	method poseeItem(unItem){
+		return equipajeImprescindible.contains(unItem)
 	}
 		
 	
