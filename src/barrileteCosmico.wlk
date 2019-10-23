@@ -256,12 +256,7 @@ class Usuario{
 	
 	method saldo() = saldo
 	method localidadDeOrigen() = localidadDeOrigen
-	/*method viajes(){
-		return viajesRealizados.map{
-			viaje =>
-				viaje.localidadFinal().nombre()
-		}
-	}*/
+	
 }
 
 class VuelosUsuarioException inherits Exception{}
