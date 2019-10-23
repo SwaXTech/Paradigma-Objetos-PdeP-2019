@@ -63,14 +63,8 @@ class CiudadHistorica inherits Localidad {
 	var museos
 	
 	override method esPeligrosa() {
-		return equipajeImprescindible.any{
-			equipaje =>
-				self.requiereLlevarSeguroAsistencia(equipaje)
-		}
-	}
+		return self.poseeItem("Seguro de asistencia al viajero")
 	
-	method requiereLlevarSeguroAsistencia(equipaje){
-		return equipaje.toLowerCase().contains("seguro de asistencia al viajero")
 	}
 	
 	override method esDestacada() {
