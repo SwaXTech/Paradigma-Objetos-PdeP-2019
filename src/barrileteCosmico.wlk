@@ -64,3 +64,5 @@ object barrileteCosmico{
 	
 	method mediosDeTransporte() = mediosDeTransporte
 	method localidades() = localidades
+	
+}
