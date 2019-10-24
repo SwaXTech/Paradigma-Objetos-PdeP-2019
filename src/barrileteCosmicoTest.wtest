@@ -16,6 +16,9 @@ describe "Barrilete Cósmico" {
 	var el114
 	var goodAirsASilverSea
 	var lastToninasAGarlicSea
+	var turbinaPotente
+	var turbinaIncendiada
+	var turbinaUltraPotente
 	
 	fixture{
 		garlicSea   = new Localidad(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500, kmUbicacion = 365)
@@ -27,13 +30,17 @@ describe "Barrilete Cósmico" {
 		barrileteCosmico.agregarLocalidad(silverSea)	
 		barrileteCosmico.agregarLocalidad(lastToninas)	
 		barrileteCosmico.agregarLocalidad(goodAirs)
-		cumbanchaVolante = new MedioDeTransporte(costoKm = 25, minutosKm = 0.0017)   // Dije suba
-		el114 = new MedioDeTransporte(costoKm = 10, minutosKm = 5)
+		
+		turbinaPotente = new Turbina(impulso = 40)
+		turbinaIncendiada = new Turbina(impulso = 10)
+		turbinaUltraPotente = new Turbina(impulso = 500000)
+		cumbanchaVolante = new Avion(turbinas = [turbinaPotente, turbinaIncendiada], minutosKm = 0.0017)   // Dije suba
+		el114 = new Micro(minutosKm = 5)
 		barrileteCosmico.agregarMedioDeTransporte(cumbanchaVolante)
 		barrileteCosmico.agregarMedioDeTransporte(el114)
 		goodAirsASilverSea = new Viaje(localidadInicial = goodAirs, localidadFinal = silverSea, medioDeTransporte= cumbanchaVolante)
 		lastToninasAGarlicSea = new Viaje(localidadInicial = lastToninas, localidadFinal = garlicSea, medioDeTransporte= el114)
-		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 15000, localidadDeOrigen = lastToninas)
+		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 50000000, localidadDeOrigen = lastToninas)
 		elDiegote = new Usuario(nombre = "Diego Maradona",  nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs)
 		
 		
@@ -118,14 +125,14 @@ describe "Barrilete Cósmico" {
 		var viaje = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = silverSea, medioDeTransporte = cumbanchaVolante)
 		
 		pHari.viajarA(viaje)
-		assert.equals(11775, pHari.saldo())
+		assert.equals(49994900, pHari.saldo())
 	}
 	
 	test "PHari intenta volar a Garlic´s Sea, pero no le alcanza el dinero" {
 		assert.throwsExceptionLike(
 			new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje"), 
 			{ 
-				var unTransporteMuyCaro = new MedioDeTransporte(costoKm = 5000, minutosKm = 1)
+				var unTransporteMuyCaro = new Avion(turbinas = [turbinaUltraPotente, turbinaUltraPotente, turbinaUltraPotente, turbinaUltraPotente, turbinaUltraPotente], minutosKm = 1)
 				var viajeAGarlicSea  = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = garlicSea, medioDeTransporte = unTransporteMuyCaro)
 				pHari.viajarA(viajeAGarlicSea)
 			}
@@ -138,6 +145,15 @@ describe "Barrilete Cósmico" {
 	
 	test "La cumbancha volante tarda 17 minutos entre Nueva York y el Congo Belga (10,260.80 km a una velocidad promedio de 36211,76km/h, lo que hace un km en 0,0017 minutos)" {
 		assert.equals(0.0017, cumbanchaVolante.minutosKm())
+	}
+	
+	test "El costo por kilometro de la cumbancha volante con una turbina de impulso 40 y otro de 10 es de $50" {
+		assert.equals(50, cumbanchaVolante.costoKm())
+	}
+	
+	test "El 'Chichanic' tiene una probabilidad de chocar de chocar de 100%, por ende su costo por km es de $100000" {
+		var chichanic = new Barco(probabilidadChoque = 100, minutosKm = 2)
+		assert.equals(100000, chichanic.costoKm())
 	}
 	
 	// Localidades
@@ -158,11 +174,11 @@ describe "Barrilete Cósmico" {
 	
 	// Viajes
 	
-	test "El costo entre Good Airs y Silver's Sea en la cumbancha volante es de $11725" {
-		assert.equals(11725 ,goodAirsASilverSea.precioViaje())
+	test "El costo entre Good Airs y Silver's Sea en la cumbancha volante es de $22100" {
+		assert.equals(22100 ,goodAirsASilverSea.precioViaje())
 	}
-	test "El costo entre Last Toninas y Garlic's Sea en el 114 es de $2750" {
-		assert.equals(2750 ,lastToninasAGarlicSea.precioViaje())	
+	test "El costo entre Last Toninas y Garlic's Sea en el 114 es de $127500" {
+		assert.equals(127500 ,lastToninasAGarlicSea.precioViaje())	
 	}
 	
 	//Usuarios
