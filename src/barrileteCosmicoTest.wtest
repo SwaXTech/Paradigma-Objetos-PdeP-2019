@@ -47,7 +47,7 @@ describe "Barrilete Cósmico" {
 		
 		
 		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 50000000, localidadDeOrigen = lastToninas, items = ["Protector Solar", "Equipo de Buceo", "Cerveza", "Protector Solar","Vacuna Gripal","Vacuna B","Necronomicon"], perfil = estudiantil)
-		elDiegote = new Usuario(nombre = "Diego Maradona",  nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs,items = ["Caña de pescar", "Piloto"], perfil = empresarial)
+		elDiegote = new Usuario(nombre = "Diego Maradona",  nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs,items = ["Caña de pescar", "Piloto", "Cerveza", "Protector Solar"], perfil = empresarial)
 		losArgento = new Usuario(nombre = "Los Argento",  nombreDeUsuario = "LosArgento", saldo = 50000, localidadDeOrigen = goodAirs, perfil = grupoFamiliar)
 		
 	}
@@ -231,9 +231,18 @@ describe "Barrilete Cósmico" {
 			new VuelosUsuarioException(message = "No se tiene el equipaje necesario para realizar el viaje") , {
 		var viajeAGoodAirs = barrileteCosmico.armarUnViaje(losArgento, goodAirs)
 		losArgento.viajarA(viajeAGoodAirs)
-		assert.equals(pHari.localidadDeOrigen(), goodAirs)
 		}
 		)
 	}
-
+	
+	// Exepcion: Esta en la misma localidad
+	
+	test "elDiegote viaja a Good Airs, cuando ya esta ahi, se lanza exepcion" {
+		assert.throwsExceptionLike(
+			new VuelosUsuarioException(message = "Se encuentra en la misma localidad a la que quiere viajar") , {
+		var viajeAGoodAirs = barrileteCosmico.armarUnViaje(elDiegote, goodAirs)
+		elDiegote.viajarA(viajeAGoodAirs)
+		}
+		)
+	}
 }
