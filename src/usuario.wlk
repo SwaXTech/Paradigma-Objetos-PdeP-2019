@@ -6,6 +6,7 @@ class Usuario{
 	var saldo
 	var localidadDeOrigen
 	var items = []
+	var perfil
 	
 	method viajarA(unViaje){
 		
@@ -75,8 +76,11 @@ class Usuario{
 		return viaje.localidadFinal() == unLugar
 	}
 	
+	
+	
 	method saldo() = saldo
 	method localidadDeOrigen() = localidadDeOrigen
+	method perfil()
 	
 }
 

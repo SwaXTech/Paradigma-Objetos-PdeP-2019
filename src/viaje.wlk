@@ -2,7 +2,7 @@ class Viaje {
 	var localidadInicial
 	var localidadFinal
 	var medioDeTransporte
-	
+
 	
 	method precioViaje(){
 		return localidadFinal.precio() + self.costoTransporte()
@@ -18,6 +18,9 @@ class Viaje {
 	}
 	
 	
+	method medioDeTransporte(unTransporte){
+		medioDeTransporte = unTransporte
+	}
 	method localidadInicial() = localidadInicial
 	method localidadFinal() = localidadFinal
 }

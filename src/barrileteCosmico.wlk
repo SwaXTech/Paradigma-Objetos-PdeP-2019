@@ -2,6 +2,7 @@ import usuario.*
 import medioDeTransporte.*
 import viaje.*
 import localidad.*
+import perfiles.*
 
 object barrileteCosmico{
 	
@@ -58,9 +59,59 @@ object barrileteCosmico{
 		}.asSet()
 	}
 	
-	method armarUnViaje(usuario, destino){
-		return new Viaje(localidadInicial = usuario.localidadDeOrigen(), localidadFinal = destino, medioDeTransporte = mediosDeTransporte.anyOne())
+	method armarUnViaje(usuario, destino, transporte){
+		return new Viaje(localidadInicial = usuario.localidadDeOrigen(), localidadFinal = destino, medioDeTransporte = transporte)
 	}
+	
+	method armarUnViaje(usuario, destino){
+		return self.armarUnViaje(usuario, destino, self.transporteSegunPerfil(usuario, destino))
+	}
+	
+	
+	
+	method transporteSegunPerfil(unUsuario, unDestino){
+		if(self.perfilEmpresarial(unUsuario)){
+			return self.elTransporteMasRapido()
+		} else if(self.perfilEstudiantil(unUsuario)){
+			return self.elTransporteMasRapidoSegunPresupuesto(unUsuario, unDestino)
+		} else {
+			return mediosDeTransporte.anyOne()
+		}
+	}
+	
+	method perfilEstudiantil(unUsuario) {
+		return unUsuario.perfil().equals(estudiantil)
+	}
+	
+	method perfilEmpresarial(unUsuario) {
+		return unUsuario.perfil().equals(empresarial)
+	}
+	
+	method elTransporteMasRapido(){
+		return mediosDeTransporte.min{
+			transporte => 
+				transporte.minutosKm()
+		}
+	}
+	
+	method elTransporteMasRapidoSegunPresupuesto(usuario, destino){
+		return self.transportesQuePuedeCostear(usuario, destino).min{
+			transporte => 
+				transporte.minutosKm()
+		}
+	}
+	
+	method transportesQuePuedeCostear(usuario, destino){
+		return mediosDeTransporte.filter{
+			transporte => 
+				usuario.puedeViajar(
+					self.armarUnViaje(usuario, destino, transporte)
+				)
+		}
+	}
+	
+	
+	
 	
 	method mediosDeTransporte() = mediosDeTransporte
 	method localidades() = localidades
