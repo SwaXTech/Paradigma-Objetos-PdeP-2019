@@ -5,7 +5,7 @@ class Usuario{
 	var siguiendo = #{}
 	var saldo
 	var localidadDeOrigen
-	var items = []
+	var items = #{}
 	var perfil
 	
 	method viajarA(unViaje){
@@ -38,8 +38,20 @@ class Usuario{
 		}
 	}
 	
-	method puedeViajar(viaje){
+	method puedeCostear(viaje){
 		return saldo >= viaje.precioViaje()
+	}
+	
+	method puedeViajar(viaje){
+		return self.puedeCostear(viaje) and self.poseeTodoLoNecesario(viaje)
+	}
+	
+	method poseeTodoLoNecesario(viaje){
+		return items.intersection(self.itemsObligatorios(viaje)) == self.itemsObligatorios(viaje)
+	}
+	
+	method itemsObligatorios(viaje) {
+		return viaje.equipajeObligatorio()
 	}
 	
 	method estaEnlaMismaLocalidad(unViaje) {

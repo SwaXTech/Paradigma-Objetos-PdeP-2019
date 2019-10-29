@@ -21,6 +21,11 @@ class Viaje {
 	method medioDeTransporte(unTransporte){
 		medioDeTransporte = unTransporte
 	}
+	
+	method equipajeObligatorio(){
+		return localidadFinal.equipajeImprescindible()
+	}
+	
 	method localidadInicial() = localidadInicial
 	method localidadFinal() = localidadFinal
 }
