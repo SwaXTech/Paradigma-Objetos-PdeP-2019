@@ -51,7 +51,11 @@ class Montania inherits Localidad {
 	var altura
 	
 	override method esPeligrosa() {
-		return super() && altura > 5000
+		return super() && self.esMuyAlta()
+	}
+	
+	method esMuyAlta() {
+		return altura > 5000
 	}
 	
 	override method esDestacada() {
@@ -68,6 +72,10 @@ class CiudadHistorica inherits Localidad {
 	}
 	
 	override method esDestacada() {
-		return super() && museos >= 3
+		return super() && self.poseeMasDeTresMuseos()
+	}
+	
+	method poseeMasDeTresMuseos() {
+		return museos >= 3
 	}
 }

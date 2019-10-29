@@ -12,8 +12,11 @@ class MedioDeTransporte {
 class Avion inherits MedioDeTransporte {
 	var turbinas = []
 	
-	method costoKm() {
-		return turbinas.sum{ unaTurbina => unaTurbina.impulso() }
+	override method costoKm() {
+		return turbinas.sum{ 
+			unaTurbina => 
+				unaTurbina.impulso()
+		}
 	}
 }
 
@@ -24,12 +27,12 @@ class Turbina {
 }
 
 class Micro inherits MedioDeTransporte {
-	method costoKm() = 5000
+	override method costoKm() = 5000
 }
 
 class Tren inherits MedioDeTransporte {
 	
-	method costoKm() {
+	override method costoKm() {
 		return self.costoMilla() * 1.61
 	}
 	
@@ -41,7 +44,7 @@ class Tren inherits MedioDeTransporte {
 class Barco inherits MedioDeTransporte {
 	var probabilidadChoque
 	
-	method costoKm() {
+	override method costoKm() {
 		return probabilidadChoque * 1000
 	}
 }
