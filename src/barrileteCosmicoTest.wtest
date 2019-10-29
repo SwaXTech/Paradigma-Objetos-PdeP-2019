@@ -224,6 +224,16 @@ describe "Barrilete Cósmico" {
 		assert.equals(pHari.localidadDeOrigen(), goodAirs)
 	}
 	
+	// Equipaje Imprescindible
 	
+	test "losArgento no pueden viajar si no tienen el equipaje imprescindible"{
+		assert.throwsExceptionLike(
+			new VuelosUsuarioException(message = "No se tiene el equipaje necesario para realizar el viaje") , {
+		var viajeAGoodAirs = barrileteCosmico.armarUnViaje(losArgento, goodAirs)
+		losArgento.viajarA(viajeAGoodAirs)
+		assert.equals(pHari.localidadDeOrigen(), goodAirs)
+		}
+		)
+	}
 
 }
