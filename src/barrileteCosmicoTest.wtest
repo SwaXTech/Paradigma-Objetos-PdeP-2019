@@ -3,6 +3,7 @@ import usuario.*
 import medioDeTransporte.*
 import viaje.*
 import localidad.*
+import perfiles.*
 
 describe "Barrilete Cósmico" {
 
@@ -12,6 +13,7 @@ describe "Barrilete Cósmico" {
 	var goodAirs
 	var pHari
 	var elDiegote
+	var losArgento
 	var cumbanchaVolante
 	var el114
 	var goodAirsASilverSea
@@ -34,15 +36,19 @@ describe "Barrilete Cósmico" {
 		turbinaPotente = new Turbina(impulso = 40)
 		turbinaIncendiada = new Turbina(impulso = 10)
 		turbinaUltraPotente = new Turbina(impulso = 500000)
+		
 		cumbanchaVolante = new Avion(turbinas = [turbinaPotente, turbinaIncendiada], minutosKm = 0.0017)   // Dije suba
 		el114 = new Micro(minutosKm = 5)
 		barrileteCosmico.agregarMedioDeTransporte(cumbanchaVolante)
 		barrileteCosmico.agregarMedioDeTransporte(el114)
+		
 		goodAirsASilverSea = new Viaje(localidadInicial = goodAirs, localidadFinal = silverSea, medioDeTransporte= cumbanchaVolante)
 		lastToninasAGarlicSea = new Viaje(localidadInicial = lastToninas, localidadFinal = garlicSea, medioDeTransporte= el114)
-		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 50000000, localidadDeOrigen = lastToninas)
-		elDiegote = new Usuario(nombre = "Diego Maradona",  nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs)
 		
+		
+		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 50000000, localidadDeOrigen = lastToninas, items = ["Protector Solar", "Equipo de Buceo", "Cerveza", "Protector Solar","Vacuna Gripal","Vacuna B","Necronomicon"], perfil = estudiantil)
+		elDiegote = new Usuario(nombre = "Diego Maradona",  nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs,items = ["Caña de pescar", "Piloto"], perfil = empresarial)
+		losArgento = new Usuario(nombre = "Los Argento",  nombreDeUsuario = "LosArgento", saldo = 50000, localidadDeOrigen = goodAirs, perfil = grupoFamiliar)
 		
 	}
 	
@@ -92,7 +98,6 @@ describe "Barrilete Cósmico" {
 			#{"Last Toninas", "Garlic's Sea", "Good Airs", "Silver's Sea"}, 
 			barrileteCosmico.cartaDeLocalidades()
 		)
-	
 	}
 	
 	test "Los kilometros de PHari son 415" {

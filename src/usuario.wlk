@@ -1,3 +1,5 @@
+import perfiles.*
+
 class Usuario{
 	var nombre
 	var nombreDeUsuario
@@ -5,7 +7,7 @@ class Usuario{
 	var siguiendo = #{}
 	var saldo
 	var localidadDeOrigen
-	var items = #{}
+	var items = []
 	var perfil
 	
 	method viajarA(unViaje){
@@ -33,6 +35,9 @@ class Usuario{
 		if (self.puedeViajar(viaje).negate()) {
 			throw new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje")	
 		}
+		if (self.tieneTodo(viaje).negate()) {
+			throw new VuelosUsuarioException(message = "No se tiene el equipaje necesario para realizar el viaje")	
+		}
 		if (self.estaEnlaMismaLocalidad(viaje)) {
 			throw new VuelosUsuarioException(message = "Se encuentra en la misma localidad a la que quiere viajar")
 		}
@@ -43,11 +48,19 @@ class Usuario{
 	}
 	
 	method puedeViajar(viaje){
-		return self.puedeCostear(viaje) and self.poseeTodoLoNecesario(viaje)
+		return self.puedeCostear(viaje) 
+	}
+	
+	method tieneTodo(viaje){
+		return self.poseeTodoLoNecesario(viaje)
 	}
 	
 	method poseeTodoLoNecesario(viaje){
-		return items.intersection(self.itemsObligatorios(viaje)) == self.itemsObligatorios(viaje)
+		return self.itemsObligatorios(viaje).all( { item => self.tiene(item) } ) 
+	}
+	
+	method tiene(item){
+		return items.contains(item)
 	}
 	
 	method itemsObligatorios(viaje) {
@@ -92,7 +105,7 @@ class Usuario{
 	
 	method saldo() = saldo
 	method localidadDeOrigen() = localidadDeOrigen
-	method perfil()
+	method perfil() = perfil
 	
 }
 
