@@ -68,23 +68,8 @@ object barrileteCosmico{
 	}
 	
 	
-	
 	method transporteSegunPerfil(unUsuario, unDestino){
-		if(self.perfilEmpresarial(unUsuario)){
-			return self.elTransporteMasRapido()
-		} else if(self.perfilEstudiantil(unUsuario)){
-			return self.elTransporteMasRapidoSegunPresupuesto(unUsuario, unDestino)
-		} else {
-			return mediosDeTransporte.anyOne()
-		}
-	}
-	
-	method perfilEstudiantil(unUsuario) {
-		return unUsuario.perfil().equals(estudiantil)
-	}
-	
-	method perfilEmpresarial(unUsuario) {
-		return unUsuario.perfil().equals(empresarial)
+		return unUsuario.transportePreferido(unDestino)
 	}
 	
 	method elTransporteMasRapido(){
@@ -94,25 +79,10 @@ object barrileteCosmico{
 		}
 	}
 	
-	method elTransporteMasRapidoSegunPresupuesto(usuario, destino){
-		return self.transportesQuePuedeCostear(usuario, destino).min{
-			transporte => 
-				transporte.minutosKm()
-		}
+	method loImportanteEsLaFamilia(){
+		return mediosDeTransporte.anyOne()
 	}
-	
-	method transportesQuePuedeCostear(usuario, destino){
-		return mediosDeTransporte.filter{
-			transporte => 
-				usuario.puedeCostear(
-					self.armarUnViaje(usuario, destino, transporte)
-				)
-		}
-	}
-	
-	
-	
-	
+
 	method mediosDeTransporte() = mediosDeTransporte
 	method localidades() = localidades
 	

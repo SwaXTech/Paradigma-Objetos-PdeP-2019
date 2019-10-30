@@ -1,4 +1,5 @@
 import perfiles.*
+import barrileteCosmico.*
 
 class Usuario{
 	var nombre
@@ -99,6 +100,19 @@ class Usuario{
 	
 	method elDestinoDelViajeEs(viaje, unLugar) {
 		return viaje.localidadFinal() == unLugar
+	}
+	
+	method transportePreferido(unDestino){
+		return perfil.transportePreferido(self, unDestino)
+	}
+	
+	method transportesQuePuedeCostear(destino){
+		return barrileteCosmico.mediosDeTransporte().filter{
+			transporte => 
+				self.puedeCostear(
+					barrileteCosmico.armarUnViaje(self, destino, transporte)
+				)
+		}
 	}
 	
 	

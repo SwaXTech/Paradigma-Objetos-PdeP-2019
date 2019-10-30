@@ -229,9 +229,9 @@ describe "Barrilete Cósmico" {
 	test "losArgento no pueden viajar si no tienen el equipaje imprescindible"{
 		assert.throwsExceptionLike(
 			new VuelosUsuarioException(message = "No se tiene el equipaje necesario para realizar el viaje") , {
-		var viajeAGoodAirs = barrileteCosmico.armarUnViaje(losArgento, goodAirs)
-		losArgento.viajarA(viajeAGoodAirs)
-		}
+				var viajeAGoodAirs = barrileteCosmico.armarUnViaje(losArgento, goodAirs)
+				losArgento.viajarA(viajeAGoodAirs)
+			}
 		)
 	}
 	
@@ -240,9 +240,9 @@ describe "Barrilete Cósmico" {
 	test "elDiegote viaja a Good Airs, cuando ya esta ahi, se lanza exepcion" {
 		assert.throwsExceptionLike(
 			new VuelosUsuarioException(message = "Se encuentra en la misma localidad a la que quiere viajar") , {
-		var viajeAGoodAirs = barrileteCosmico.armarUnViaje(elDiegote, goodAirs)
-		elDiegote.viajarA(viajeAGoodAirs)
-		}
+				var viajeAGoodAirs = barrileteCosmico.armarUnViaje(elDiegote, goodAirs)
+				elDiegote.viajarA(viajeAGoodAirs)
+			}
 		)
 	}
 }
