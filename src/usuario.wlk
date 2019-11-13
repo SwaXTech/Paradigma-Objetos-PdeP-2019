@@ -33,7 +33,7 @@ class Usuario{
 	}
 	
 	method validarQuePuedaViajar(viaje) {
-		if (self.puedeViajar(viaje).negate()) {
+		if (self.puedeCostear(viaje).negate()) {
 			throw new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje")	
 		}
 		if (self.poseeTodoLoNecesario(viaje).negate()) {
@@ -46,10 +46,6 @@ class Usuario{
 	
 	method puedeCostear(viaje){
 		return saldo >= viaje.precioViaje()
-	}
-	
-	method puedeViajar(viaje){
-		return self.puedeCostear(viaje) 
 	}
 
 	
@@ -101,15 +97,6 @@ class Usuario{
 	
 	method transportePreferido(unDestino){
 		return perfil.transportePreferido(self, unDestino)
-	}
-	
-	method transportesQuePuedeCostear(destino){
-		return barrileteCosmico.mediosDeTransporte().filter{
-			transporte => 
-				self.puedeCostear(
-					barrileteCosmico.armarUnViaje(self, destino, transporte)
-				)
-		}
 	}
 	
 	

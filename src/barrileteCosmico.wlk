@@ -82,6 +82,16 @@ object barrileteCosmico{
 	method loImportanteEsLaFamilia(){
 		return mediosDeTransporte.anyOne()
 	}
+	
+	method transportesQuePuedeCostear(usuario, destino){
+		return mediosDeTransporte.filter{
+			transporte => 
+				usuario.puedeViajar(
+					self.armarUnViaje(usuario, destino, transporte)
+				)
+		}
+		
+	}
 
 	method mediosDeTransporte() = mediosDeTransporte
 	method localidades() = localidades
