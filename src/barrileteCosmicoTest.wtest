@@ -21,6 +21,8 @@ describe "Barrilete Cósmico" {
 	var turbinaPotente
 	var turbinaIncendiada
 	var turbinaUltraPotente
+	var elTanque
+	var elRoca
 	
 	fixture{
 		garlicSea   = new Localidad(nombre = "Garlic's Sea", equipajeImprescindible = ["Caña de pescar", "Piloto"],                precio= 2500, kmUbicacion = 365)
@@ -33,23 +35,25 @@ describe "Barrilete Cósmico" {
 		barrileteCosmico.agregarLocalidad(lastToninas)	
 		barrileteCosmico.agregarLocalidad(goodAirs)
 		
-		turbinaPotente = new Turbina(impulso = 40)
-		turbinaIncendiada = new Turbina(impulso = 10)
+		turbinaPotente = new Turbina(impulso = 4000)
+		turbinaIncendiada = new Turbina(impulso = 1000)
 		turbinaUltraPotente = new Turbina(impulso = 500000)
 		
 		cumbanchaVolante = new Avion(turbinas = [turbinaPotente, turbinaIncendiada], minutosKm = 0.0017)   // Dije suba
 		el114 = new Micro(minutosKm = 5)
+		elRoca = new Tren(minutosKm = 1)
 		barrileteCosmico.agregarMedioDeTransporte(cumbanchaVolante)
 		barrileteCosmico.agregarMedioDeTransporte(el114)
+		barrileteCosmico.agregarMedioDeTransporte(elRoca)
 		
 		goodAirsASilverSea = new Viaje(localidadInicial = goodAirs, localidadFinal = silverSea, medioDeTransporte= cumbanchaVolante)
 		lastToninasAGarlicSea = new Viaje(localidadInicial = lastToninas, localidadFinal = garlicSea, medioDeTransporte= el114)
 		
 		
-		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 50000000, localidadDeOrigen = lastToninas, items = ["Protector Solar", "Equipo de Buceo", "Cerveza", "Protector Solar","Vacuna Gripal","Vacuna B","Necronomicon"], perfil = estudiantil)
+		pHari = new Usuario(nombre = "Pablo Hari", nombreDeUsuario ="PHari", saldo = 2000000, localidadDeOrigen = lastToninas, items = ["Protector Solar", "Equipo de Buceo", "Cerveza", "Protector Solar","Vacuna Gripal","Vacuna B","Necronomicon"], perfil = estudiantil)
 		elDiegote = new Usuario(nombre = "Diego Maradona",  nombreDeUsuario = "ElDiegote", saldo = 3000000, localidadDeOrigen = goodAirs,items = ["Caña de pescar", "Piloto", "Cerveza", "Protector Solar"], perfil = empresarial)
 		losArgento = new Usuario(nombre = "Los Argento",  nombreDeUsuario = "LosArgento", saldo = 50000, localidadDeOrigen = goodAirs, perfil = grupoFamiliar)
-		
+		elTanque = new Usuario(nombre =  "Julian El Tanque", nombreDeUsuario = "El tanque", saldo = 1262550, localidadDeOrigen = goodAirs, perfil = estudiantil, items = ["Vacuna Gripal", "Vacuna B", "Necronomicon"])
 	}
 	
 	test "Las localidades más importantes de Barrilete Cósmico son: Garlic's Sea y Last Toninas"{
@@ -102,8 +106,8 @@ describe "Barrilete Cósmico" {
 	
 	test "Los kilometros de PHari son 415" {
 		//Estos viajes no pueden ser armados por barrilete cósmico porque el medio de transporte es al azar y en este test no se contempla el tema saldo.
-		var viajeASilverSea = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = silverSea, medioDeTransporte = cumbanchaVolante)
-		var viajeAGoodAirs    = new Viaje(localidadInicial = lastToninas, localidadFinal = goodAirs, medioDeTransporte = cumbanchaVolante)
+		var viajeASilverSea = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = silverSea, medioDeTransporte = elRoca)
+		var viajeAGoodAirs    = new Viaje(localidadInicial = lastToninas, localidadFinal = goodAirs, medioDeTransporte = elRoca)
 		pHari.viajarA(viajeASilverSea)
 		pHari.viajarA(viajeAGoodAirs)
 		assert.equals(415, pHari.obtenerKM())
@@ -125,12 +129,9 @@ describe "Barrilete Cósmico" {
 		assert.that(pHari.realizoViajeA(silverSea))
 	}
 	
-	test "PHari vuela a Silver's Sea y se le descuenta dinero"{
-		//Este viaje no puede ser armado por barrilete cósmico porque el medio de transporte es al azar y en este test no se contempla el tema saldo.
-		var viaje = new Viaje(localidadInicial = pHari.localidadDeOrigen(), localidadFinal = silverSea, medioDeTransporte = cumbanchaVolante)
-		
-		pHari.viajarA(viaje)
-		assert.equals(49994900, pHari.saldo())
+	test "PHari vuela a Silver's Sea y se le descuenta dinero"{		
+		pHari.viajarA(barrileteCosmico.armarUnViaje(pHari, silverSea))
+		assert.equals(1623650, pHari.saldo())
 	}
 	
 	test "PHari intenta volar a Garlic´s Sea, pero no le alcanza el dinero" {
@@ -152,8 +153,8 @@ describe "Barrilete Cósmico" {
 		assert.equals(0.0017, cumbanchaVolante.minutosKm())
 	}
 	
-	test "El costo por kilometro de la cumbancha volante con una turbina de impulso 40 y otro de 10 es de $50" {
-		assert.equals(50, cumbanchaVolante.costoKm())
+	test "El costo por kilometro de la cumbancha volante con una turbina de impulso 4000 y otro de 1000 es de $50" {
+		assert.equals(5000, cumbanchaVolante.costoKm())
 	}
 	
 	test "El 'Chichanic' tiene una probabilidad de chocar de chocar de 100%, por ende su costo por km es de $100000" {
@@ -179,8 +180,8 @@ describe "Barrilete Cósmico" {
 	
 	// Viajes
 	
-	test "El costo entre Good Airs y Silver's Sea en la cumbancha volante es de $22100" {
-		assert.equals(22100 ,goodAirsASilverSea.precioViaje())
+	test "El costo entre Good Airs y Silver's Sea en la cumbancha volante es de $2076350" {
+		assert.equals(2076350 ,goodAirsASilverSea.precioViaje())
 	}
 	test "El costo entre Last Toninas y Garlic's Sea en el 114 es de $127500" {
 		assert.equals(127500 ,lastToninasAGarlicSea.precioViaje())	
@@ -244,5 +245,27 @@ describe "Barrilete Cósmico" {
 				elDiegote.viajarA(viajeAGoodAirs)
 			}
 		)
+	}
+	
+	test "El transporte más rápido es la cumbancha volante"{
+		assert.equals(barrileteCosmico.elTransporteMasRapido(), cumbanchaVolante)
+	}
+	
+	test "elDiegote es un empresario que puede usar el transporte más rápido"{
+		assert.equals(elDiegote.transportePreferido(goodAirs), cumbanchaVolante)
+	}
+	
+	test "Un viaje de goodAirs a lastToninas en tren vale $1262520"{
+		var viaje = new Viaje(localidadInicial = goodAirs, localidadFinal = lastToninas, medioDeTransporte = elRoca)
+		assert.equals(viaje.precioViaje(), 1262520)
+	}
+	
+	test "Un viaje de goodAirs a lastToninas en la cumbancha vale $1703500"{
+		var viaje = new Viaje(localidadInicial = goodAirs, localidadFinal = lastToninas, medioDeTransporte = cumbanchaVolante)
+		assert.equals(viaje.precioViaje(), 1703500)
+	}
+	
+	test "El estudiante debe poder elegir el mejor transporte segun su presupuesto"{
+		assert.equals(elTanque.transportePreferido(lastToninas), elRoca)
 	}
 }
