@@ -5,11 +5,8 @@ object empresarial{
 	}
 }
 object estudiantil{
-	method transportePreferido(usuario, destino){
-		return usuario.transportesQuePuedeCostear(destino).min{
-			transporte => 
-				transporte.minutosKm()
-		}
+	method transportePreferido(usuario,destino){
+		return usuario.elTransporteMasRapido(destino)
 	}
 	
 }

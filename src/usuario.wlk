@@ -99,6 +99,10 @@ class Usuario{
 		return perfil.transportePreferido(self, unDestino)
 	}
 	
+	method elTransporteMasRapido(unDestino){
+		return barrileteCosmico.elTransporteMasRapidoPara(self, unDestino)
+	}
+	
 	
 	
 	method saldo() = saldo

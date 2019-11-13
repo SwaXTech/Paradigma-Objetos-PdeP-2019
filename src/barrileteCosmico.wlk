@@ -86,11 +86,18 @@ object barrileteCosmico{
 	method transportesQuePuedeCostear(usuario, destino){
 		return mediosDeTransporte.filter{
 			transporte => 
-				usuario.puedeViajar(
+				usuario.puedeCostear(
 					self.armarUnViaje(usuario, destino, transporte)
 				)
 		}
 		
+	}
+	
+	method elTransporteMasRapidoPara(usuario, destino){
+		return self.transportesQuePuedeCostear(usuario, destino).min{
+			transporte => 
+				transporte.minutosKm()
+		}
 	}
 
 	method mediosDeTransporte() = mediosDeTransporte
