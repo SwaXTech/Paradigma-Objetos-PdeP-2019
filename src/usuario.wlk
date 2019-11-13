@@ -36,7 +36,7 @@ class Usuario{
 		if (self.puedeViajar(viaje).negate()) {
 			throw new VuelosUsuarioException(message = "No se cuenta con saldo suficiente para realizar el viaje")	
 		}
-		if (self.tieneTodo(viaje).negate()) {
+		if (self.poseeTodoLoNecesario(viaje).negate()) {
 			throw new VuelosUsuarioException(message = "No se tiene el equipaje necesario para realizar el viaje")	
 		}
 		if (self.estaEnlaMismaLocalidad(viaje)) {
@@ -51,10 +51,7 @@ class Usuario{
 	method puedeViajar(viaje){
 		return self.puedeCostear(viaje) 
 	}
-	
-	method tieneTodo(viaje){
-		return self.poseeTodoLoNecesario(viaje)
-	}
+
 	
 	method poseeTodoLoNecesario(viaje){
 		return self.itemsObligatorios(viaje).all( { item => self.tiene(item) } ) 
